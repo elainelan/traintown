@@ -1,0 +1,13 @@
+{
+  "seq"  :  "序号",
+  "login_time"  :  "登录时间",
+  "login_ip"  :  "登录IP",
+  "login_plat"  :  "登录平台",
+  
+  "search_loginip_invalid":   "请输入正确的IP地址",
+  "search_loginip_placeholder": "支持IP模糊查询",
+  
+  "search_time_invalid":  "请输入正确的登录时间",
+  
+  "test": ""
+}

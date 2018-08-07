@@ -1,0 +1,62 @@
+<!-- 模态框（添加） -->
+<div class="modal fade" id="modal_add" name="modal_add" role="dialog" aria-labelledby="modal_add" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                
+                
+                <!-- ======模态框（添加）标题====== -->
+                <h4 class="modal-title">{{ langs.add_new_white_ip }}</h4>
+                
+                
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="modal_add_form" name="modal_add_form" novalidate="novalidate">
+                    <div class="row">
+                        
+                        
+                        <!-- ======模态框（添加）内容====== -->
+                        <!-- 平台 -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platid }}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="platid" name="platid"
+                                    data-ng-model="add.platid"
+                                    placeholder="{{ langs.platid_placeholder }}"
+                                    required>
+                            </div>
+                        </div>
+                        <!-- 白名单IP -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.white_ip }}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="white_ip" name="white_ip"
+                                    data-ng-model="add.ip"
+                                    data-toggle="tooltip" title="{{ langs.white_ip_tooltip }}"
+                                    placeholder="{{ langs.white_ip_placeholder }}"
+                                    required>
+                            </div>
+                        </div>
+                        <!-- 备注 -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.notes }}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="notes" name="notes"
+                                    data-ng-model="add.notes"
+                                    placeholder="{{ langs.notes_placeholder }}"
+                                    required>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_add_ok()">{{ langs.submit }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

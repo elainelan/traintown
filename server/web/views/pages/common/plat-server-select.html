@@ -1,0 +1,153 @@
+<!--
+ng-include后：
+    1、该文件里面的$scope是新建的，变量都是本作用域使用，如果需要使用本页面之外的变量，应该“ $parent.变量名 ”引用
+    2、本页面外的对象不需要使用$parent，可直接使用，例如：data.page_current
+-->
+
+<div class="box-body no-padding" data-ng-init="getPlatforms();">
+    <!-- 平台 -->
+    <div class="col-sm-12">
+     <h4>
+        <label align="center" class="col-sm-12">{{ langs.select_plat }}</label>
+     </h4>
+     <div class="col-sm-4 col-sm-offset-4 col-lg-2 col-lg-offset-5">
+         <select class="form-control select2" tabindex="-1" data-ng-change="search_plat_change($parent.search.platid)" data-ng-model="$parent.search.platid" style="width:100%">
+             <option value="">{{ langs.plat_all }}</option>
+             <option data-ng-repeat="platform in platforms" value="{{ platform.id }}" data-repeat-finish="select2_init()">{{ platform.id+' : '+platform.name }}</option>
+         </select>
+     </div>
+    </div>
+
+    <div class="col-sm-12">
+        <hr>
+    </div>
+    
+    <!-- 区服 -->
+    <div class="col-sm-12">
+	    <h4>
+	      <label align="center" class="col-sm-12">{{ langs.select_srv }}</label>
+	    </h4>
+	    <div class="col-sm-12">
+		  <div id="selected_srvs" class="box box-default">
+		    <div class="box-header with-border">
+              <h3 class="box-title">{{ langs.selected_srvs }}</h3>
+		      <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-ng-click="selection_srv_del_all()" title= "{{ langs.un_select_all }}">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-ng-click="srv_sel_modal_show()" title= "{{ langs.select_srv_modal_show }}">
+                    <i class="fa fa-server"></i>
+                </button>
+		        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+		            <i class="fa fa-minus"></i>
+		        </button>
+		      </div>
+		      <!-- /.box-tools -->
+		    </div>
+		    <!-- /.box-header -->
+		    <div class="box-body">
+		        <div class="margin">
+	                <div class="btn-group srv_sel" data-ng-repeat="x in $root.selected_srvs">
+	                  <button type="button" class="btn btn-default srv_sel_name" data-toggle="tooltip" data-placement="auto top" title="{{x.srv_name}}[{{x.sid}}]">{{x.srv_name}}[{{x.sid}}]</button>
+	                  <button type="button" class="btn btn-default" data-ng-click="selection_srv_del(x.sid)" >
+	                    <span class="glyphicon glyphicon-remove text-danger"></span>
+	                  </button>
+	                </div>
+                </div>
+		    </div>
+		    <!-- /.box-body -->
+		  </div>
+	  </div>
+	  <!-- /.box -->
+    <!--  
+      <h4>
+        <label align="center" class="col-sm-12">{{ langs.select_srv }}</label>
+      </h4>
+      <div class="col-sm-8 col-sm-offset-2">
+         <div data-ng-repeat="x in servers"  data-ng-if="!$parent.search.platid || x.platids.indexOf($parent.search.platid)>=0" class="checkbox_sel checkbox">
+           <label data-toggle="tooltip" data-placement="auto top" title="{{x.srv_name}}[{{x.sid}}]">
+             <input type="checkbox" class="srv_sel" name="srv_sel[]" id="srv_sel_{{x.sid}}" value="{{x.sid}}" data-ng-model="$parent.search.sids[x.sid]">
+             {{x.srv_name}}[{{x.sid}}]
+           </label>
+         </div>
+      </div>
+      -->
+    </div>
+    
+    <div class="col-sm-12">
+        <hr>
+    </div>
+</div>
+
+<!-- 选择区服模态框 -->
+<div class="modal fade" id="modal_srv_sel" role="dialog" aria-labelledby="modal_srv_sel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-header">
+                <form class="form-horizontal" role="form" name="modal_search_form" novalidate="novalidate">
+                    <!-- 区服类型查询条件 -->
+                    <div class="row">
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.type }}:</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2" tabindex="-1" data-ng-init="$root.srv_search.type='0'" data-ng-model="srv_search.type" style="width:100%" data-ng-change="jump(go_page)">
+                                    <option value="">{{ langs.type_all }}</option>
+                                    <option data-ng-repeat="(k,v) in langs.type_x" value="{{ k }}">{{ v }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 所属平台查询条件 -->
+                    <div class="row">
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platids }}:</label>
+                            <div class="col-sm-6">
+                                <select id="srv_search_platid" class="form-control select2" tabindex="-1" data-ng-model="$root.srv_search.platid" data-ng-change="jump(go_page)" style="width:100%">
+                                    <option value="">{{ langs.plat_all }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+		    <div class="modal-body">
+	            <div class="box-header" >
+	                <label>
+					    {{langs.box_header_show}}
+					    <select name="page_len" class="inline" data-ng-model="$root.srv_length_select" data-ng-change="set_default_page_number($root.srv_length_select);jump(go_page);">
+					        <option data-ng-repeat="x in page_number" value="{{ x }}">{{ x }}</option>
+					    </select>
+					    {{langs.box_header_entries}}
+					</label>
+	            </div>
+	            
+	            <div class="box-body">
+                    <div data-ng-init="srv_sel_init()" data-ui-i18n="ui_grid.get_i18n()">
+                        <div data-ng-style="ui_grid_style"
+                            data-ui-grid="gridOptions"
+                            data-ui-grid-auto-resize
+                            data-ui-grid-resize-columns
+                            data-ui-grid-move-columns
+                            data-ui-grid-pinning
+                            data-ui-grid-exporter
+                            data-ui-grid-selection
+                        >
+                        </div>
+                    </div>
+	            </div>
+	            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+	                <!-- pages/common/box-footer.html -->
+	            </div>
+		    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">{{ langs.modal_del_ok }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

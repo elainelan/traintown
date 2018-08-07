@@ -1,0 +1,13 @@
+{
+  "user_id":"用户id",
+  "role_id":"角色id",
+  "username":"使用者",
+  "username_tooltip": "[账号ID]使用者",
+  "role_name":"角色",
+  "role_name_tooltip":"角色ID : 角色名称",
+  "pri_id":"权限id",
+  "adduser":"添加账号",
+  "confirm_del_user":"确定移除该账号吗？",
+  "no_user_to_role":"没有账号可赋予了！",
+  "role_all":"所有角色"
+}

@@ -1,0 +1,150 @@
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="box">
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{langs['seq']}}</th>
+                        <th data-toggle="tooltip" title="{{langs.role_name_tooltip}}">{{langs['role_name']}}<i class="fa fa-question-circle text-orange"></i></th>
+                        <th>{{langs['role_desc']}}</th>
+                        <th data-ng-if="headfunc.manager">{{langs['operation']}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="x in data.items">
+                        <td>{{ $index + 1 + (data.page_current-1)* data.items_per_page }}</td>
+                        <td >{{ x.id+' : '+x.name}}</td>
+                        <td data-ng-if="!x.edit">{{x.desc}}</td>
+                        <td data-ng-if="x.edit && headfunc.manager"><input type="text" class="form-control" id="mod.desc" data-ng-model="x.desc"></td>
+                        <td data-ng-if="headfunc.manager" style="min-width: 141px;">
+                            <button data-ng-if="x.baoliu==0 && !x.edit"
+                                    data-ng-click="manager(x)" title="{{langs.manage}}" class="pull-left btn btn-primary btn-sm btn-func">
+                                <i class="fa fa-wrench"></i>
+                            </button>
+                            <button data-ng-if="x.baoliu==0 && !x.edit"
+                                    data-ng-click="mod(x)" title="{{langs.mod}}" class="pull-left btn btn-warning btn-sm btn-func" >
+                                <i class="fa fa-pencil-square-o"></i>
+                            </button>
+                            <button data-ng-if="x.edit" type="button"
+                                    data-ng-click="mod_ok(x)" title="{{langs.save}}" class="pull-left btn btn-success btn-sm btn-func">
+                                <i class="fa fa-save"></i>
+                            </button>
+                            <button data-ng-if="x.edit" type="button"
+                                    data-ng-click="mod_cancel(x)" title="{{langs.cancel}}" class="pull-left btn btn-default btn-sm btn-func">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <button data-ng-if="x.baoliu==0 && !x.edit"
+                                    data-ng-click="modal_del(x.id)" title="{{langs.del}}"
+                                    class="pull-left btn btn-danger btn-sm btn-func">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+                <!-- common/box-footer.html -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（管理） -->
+<div class="modal fade" id="modal_manager"  role="dialog" aria-labelledby="modal_manager" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ langs['permission']+langs['manage'] }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="zTreeDemoBackground left ">
+                        <ul id="treeDemo" class="ztree"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-ng-click="manager_ok()">{{ langs['submit']}}</button>
+                <button type="button" class="btn btn-default"  data-dismiss="modal">{{ langs['modal_close_btn']}}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（添加） -->
+<div class="modal fade" id="modal_add" name="modal_add" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ langs['add_new_role'] }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{langs['role_name']}}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="role_name" name="role_name" data-ng-model="add.role_name" data-ng-blur="check_exist()">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{langs['role_desc']}}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="add_role_desc" name="add_role_desc" data-ng-model="add.role_desc">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_add_ok()">{{ langs['submit']}}</button>
+                <button type="button" class="btn btn-warning" data-ng-click="modal_add_reset()">{{ langs['reset'] }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs['modal_close_btn']}}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（查找） -->
+<div class="modal fade" id="modal_search" role="dialog" aria-labelledby="modal_search" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="modal_search_form" novalidate="novalidate">
+                    <div class="row">
+                        <!-- 角色名-->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.role_name }}:</label>
+                            <div class="col-sm-7">
+                                <select class="form-control select2" tabindex="-1" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.role_id" style="width:100%">
+                                    <option value="">{{ langs.role_all }}</option>
+                                    <option data-ng-repeat="x in admin_roles" value="{{ x.id }}">{{ x.id+' : '+x.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_search_ok()">{{ langs.modal_search_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（删除确认） -->
+<data-ng-include src="'pages/common/modal_del.html'">
+    <!-- pages/common/modal_del.html -->
+</data-ng-include>

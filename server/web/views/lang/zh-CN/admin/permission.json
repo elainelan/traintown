@@ -1,0 +1,27 @@
+{
+  "role_id":"角色id",
+  "role_name":"角色",
+  "role_name_tooltip": "角色ID : 角色名",
+  "role_desc":"角色描述",
+  "permission":"权限",
+  "manage":"管理",
+  "add_new_role":"新增角色",
+  "confirm_del_oldrole":"确定删除该角色吗？",
+  "roleid_exist":"该角色id已经存在",
+  "rolename_exist":"该角色名称已经存在",
+  "modify_cannot_empty":"修改项不能为空",
+  "role_all":"所有角色",
+  
+  "add_role_name_invalid": "请输入符合要求的角色名称",
+  "add_role_name_not_empty": "角色名称不能为空",
+  "add_role_name_stringLength": "角色名称不能超过30字符",
+  "add_role_name_exist": "角色已存在，请重新输入",
+  
+  "add_role_desc_invalid": "请输入符合要求的角色描述",
+  "add_role_desc_not_empty": "角色描述不能为空",
+  "add_role_desc_stringLength": "角色描述不能超过100字符",
+  
+  
+  
+  "test": ""
+}

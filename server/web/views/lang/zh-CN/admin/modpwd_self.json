@@ -1,0 +1,50 @@
+{
+  "oldpwd" : "您的原密码",
+  "oldpwd_placeholder" : "请输入您的原密码",
+  "oldpwd_tooltip": "如果不修改密码，请留空",
+  "oldpwd_invalid" : "原密码错误，请核对",
+  "oldpwd_not_empty":"原密码不能为空",
+  
+  "pwd_regexp": "密码是大写字母+小写字母+数字的组合密码",
+  "pwd_stringLength": "密码是8-12位字符",
+  
+  "newpwd" : "您的新密码",
+  "newpwd_placeholder" : "请输入您的新密码",
+  "newpwd_tooltip": "8-12位字符，必须是大写字母+小写字母+数字的组合密码",
+  "newpwd_invalid" : "新密码不符合要求",
+  "newpwd_not_empty":"新密码不能为空",
+  "newpwd_not_same" : "新密码不能和原密码一样",
+  
+  "vpwd"   : "确认新密码",
+  "vpwd_placeholder" : "请再次输入新密码",
+  "vpwd_invalid" : "密码输入不一致",
+  "vpwd_not_empty": "确认新密码不能为空",
+  
+  
+  
+  "oldsk"  : "您的原安全码",
+  "oldsk_placeholder" : "请输入您的原安全码",
+  "oldsk_tooltip" : "如果不修改安全码，请留空",
+  "oldsk_invalid" : "原安全码错误，请核对",
+  "oldsk_not_empty": "原安全码不能为空",
+  
+  "safekey_stringLength": "安全码4-6位字符",
+  "safekey_regexp": "只支持大小写字母和数字",
+  
+  "newsk"  : "您的新安全码",
+  "newsk_placeholder" : "请输入您的新安全码",
+  "newsk_tooltip": "4-6位字符，只支持大小写字母和数字",
+  "newsk_invalid" : "新安全码不符合要求",  
+  "newsk_not_empty":"新安全码不能为空",
+  "newsk_not_same" : "新安全码不能和原安全码一样",
+  
+  "vsk"    : "确认新安全码",
+  "vsk_placeholder" : "请再次输入新安全码",
+  "vsk_invalid" : "安全码输入不一致",
+  "vsk_not_empty": "确认新安全码不能为空",
+  
+  
+  "mod_admin_user_pwd_success" : "修改成功！",
+  "mod_admin_user_pwd_fail" : "修改失败"
+
+}

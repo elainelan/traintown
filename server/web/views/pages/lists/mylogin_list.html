@@ -1,0 +1,23 @@
+<div class="col-sm-10 col-sm-offset-1">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>{{langs['seq']}}</th>
+            <th>{{langs['login_time']}}</th>
+            <th>{{langs['login_ip']}}</th>
+            <th>{{langs['error_cnt']}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div data-ng-if="x" class="form-group">
+            <tr data-ng-repeat="x in datas">
+                <td>{{$index + 1}}</td>
+                <td>{{x.logintime*1000 | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td>{{x.loginip}}</td>
+                <td>{{x.errorcnt}}</td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+
+</div>

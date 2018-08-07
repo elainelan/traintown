@@ -1,0 +1,26 @@
+{
+    "login_message": "請先登錄",
+    
+    "name": "用戶名",
+    "name_input": "請輸入用戶名",
+    
+    
+    "passwd": "密碼",
+    "passwd_input": "請輸入密碼",
+    
+    "safekey": "安全碼",
+    "safekey_input": "請輸入安全碼",
+    
+    "login": "登錄",
+    
+    "first_login_force" : "首次登錄請修改密碼",
+    
+    "input_new_passwd_placeholder" : "請輸入新密碼",
+    "input_vnew_passwd_placeholder": "請確認新密碼",
+    
+    "input_new_safekey_placeholder" : "請輸入新安全碼",
+    "input_vnew_safekey_placeholder": "請確認新安全碼",
+    
+    
+    "test":""
+}

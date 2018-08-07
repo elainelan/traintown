@@ -1,0 +1,38 @@
+{
+    "add_new_black_ip":   "新增黑名单",
+    
+    "platid":   "所属平台",
+    "platid_tooltip": "平台ID : 平台名称",
+    "platid_placeholder": "请输入平台ID",
+    
+    "black_ip" : "黑名单IP",
+    "black_ip_placeholder": "请输入新增黑名单IP",
+    "black_ip_tooltip": "支持*替代，例如: 10.1.*.*表示10.1.开头的所有IP",
+    
+    "notes":    "备注",
+    "notes_placeholder": "请输入备注",
+    
+    
+    
+    "confirm_del_black_ip": "确定把该IP从黑名单中移除吗？",
+    
+    
+    "error_100400": "该IP已被其他平台管理",
+    
+    "search_notes_placeholder": "支持备注模糊查询",
+    "search_notes_invalid": "请输入正确的备注信息",
+    "search_notes_stringLength": "备注信息不能超过100字符",
+    
+    "search_black_ip_placeholder": "支持IP模糊查询",
+    "search_black_ip_invalid": "请输入正确的黑名单IP",
+    
+    
+    "add_ip_invalid": "请输入正确的黑名单IP",
+    "add_ip_not_empty": "黑名单IP不能为空",
+    
+    "add_notes_invalid": "请输入备注",
+    "add_notes_not_empty": "备注不能为空",
+    
+    
+    "test":""
+}

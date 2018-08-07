@@ -1,0 +1,22 @@
+{
+  "seq"  :  "序号",
+  "login_time"  :  "登录时间",
+  "login_ip"  :  "登录IP",
+  "login_ip_tip"  :  "请输入IP",
+  "plat_all"  :  "全部平台",
+  "user_all"  :  "全部使用者",
+  "platid" : "平台ID",
+  "plat_0"  :  "跨平台",
+  "login_plat"  :  "所属平台",
+  "login_plat_tooltip": "平台ID : 平台名称",
+  "serach_cond"  :  "查询条件",
+  "username"  :  "使用者",
+  "username_tooltip": "账号ID : 使用者",
+  
+  "search_loginip_invalid":   "请输入正确的IP地址",
+  "search_loginip_placeholder": "支持IP模糊查询",
+  
+  "search_time_invalid":  "请输入正确的登录时间",
+  
+  "test": ""
+}

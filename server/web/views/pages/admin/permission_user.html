@@ -1,0 +1,139 @@
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="box">
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+            
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{ langs.seq }}</th>
+                        <th data-toggle="tooltip" title="{{langs.username_tooltip}}">{{ langs.username }}<i class="fa fa-question-circle text-orange"></th>
+                        <th data-toggle="tooltip" title="{{langs.platform_tooltip}}">{{ langs.platform }}<i class="fa fa-question-circle text-orange"></th>
+                        <th data-toggle="tooltip" title="{{langs.role_name_tooltip}}">{{ langs.role_name }}<i class="fa fa-question-circle text-orange"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="x in data.items">
+                        <td>{{ $index + 1 + (data.page_current-1)* data.items_per_page }}</td>
+                        
+                        <td>{{ x.user_id + ' : ' + x.loginname }}</td>
+                        
+                        <td data-ng-if="x.platid!=0">{{ x.platid+' : '+platforms[x.platid].name }}</td>
+                        <td data-ng-if="x.platid==0">{{ x.platid+' : '+langs.plat_0 }}</td>
+                        
+                        <td>
+                            <button data-ng-if="x.baoliu==0 && pri.manager" class=" pull-left  spandel btn btn-default btn-sm btn-func"
+                                    data-ng-class="{true: 'spandel btn btn-danger', false: 'spandel btn btn-default'}[isMouseEnter] "
+                                    data-ng-mouseover="isMouseEnter=true"
+                                    data-ng-mouseleave="isMouseEnter=false"
+                                    title="{{ m | diantokuo}}"
+                                    data-ng-repeat="m in x.idname "
+                                    data-ng-click="modal_del(x.user_id, m)">
+                                {{ m | diantokuo}}&nbsp; <span class="x_class"><i class="fa fa-remove"></i></span>
+                            </button>
+                            <button data-ng-if="x.baoliu==1 || !pri.manager" class=" pull-left  spandel btn btn-default btn-sm btn-func"
+                                    data-ng-repeat="m in x.idname">
+                                {{ m | diantokuo}}&nbsp;
+                            </button>
+                            <button data-ng-if="x.baoliu==0 && pri.manager" data-ng-click="modal_add(x)"
+                                   title="{{langs.addrole}}" class="pull-left btn btn-primary btn-sm btn-func btn-func-margin">
+                                   <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+                <!-- pages/common/box-footer.html -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 模态框（添加） -->
+<div class="modal fade" id="modal_add" name="modal_add" role="dialog" aria-labelledby="modal_add" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ langs.addrole }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6" data-ng-repeat="x in roles">
+                        <label>
+                            <input type="checkbox" value="{{x.id}}"
+                                data-ng-checked="isSelected(x.id)"
+                                data-ng-click="modal_add_checked($event,x)">{{x.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_add_ok()">{{ langs.submit }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!-- 模态框（查找） -->
+<div class="modal fade" id="modal_search" role="dialog" aria-labelledby="modal_search" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="modal_search_form" novalidate="novalidate">
+                    <div class="row">
+                    
+                        <!-- username -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.username }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control search_select2" tabindex="-1" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.user_id" style="width:100%">
+                                    <option value="">{{ langs.user_all }}</option>
+                                    <option data-ng-repeat="(userid,x) in admin_users" value="{{ x.id }}" data-ng-if="!search.platid || x.platid==search.platid">
+                                        {{ x.id+' : '+x.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- platid -->
+                        <div class="form-group col-sm-10 col-sm-offset-1" data-ng-view="platid">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platform }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control search_select2" tabindex="-1" data-ng-change="modal_search_platform()" data-ng-model="search.platid" style="width:100%">
+                                    <option value="">{{ langs.plat_all }}</option>
+                                    <option value="0">{{ '0 : '+langs.plat_0 }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_search_ok()">{{ langs.modal_search_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（删除确认） -->
+<data-ng-include src="'pages/common/modal_del.html'">
+    <!-- pages/common/modal_del.html -->
+</data-ng-include>

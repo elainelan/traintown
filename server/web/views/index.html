@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{langs.admin_projects}} | GameAdmin | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="lib/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="lib/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="lib/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="lib/dist/css/skins/_all-skins.min.css">
+  
+  <!-- Google Font -->
+  <link rel="stylesheet" href="lib/dist/css/googleapis.css">
+  
+</head>
+<body class="hold-transition login-page" data-ng-controller="loginCtrl">
+<div class="wrapper">
+
+    <!-- 登录 -->
+    <div class="login-box">
+      <div class="login-logo">
+        <b>Game</b>Admin<br/>
+        <h4 class="text-danger"><b>{{langs.admin_projects}}</b></h4>
+      </div>
+      <!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg" id="info" data-ng-class="login_message_class">{{langs.login_message}}</p>
+    
+        <form name="myForm" novalidate="novalidate">
+          
+          <div class="form-group has-feedback">
+            <input type="text" id="name" name="name" class="form-control" placeholder="{{langs.name}}"
+            data-ng-model="name" data-ng-keyup="loginKeyup($event)"
+            required>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          
+          <div class="form-group has-feedback">
+            <input type="password" id="passwd" name="passwd" class="form-control" placeholder="{{langs.passwd}}"
+            data-ng-model="passwd" data-ng-keyup="loginKeyup($event)"
+            required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          
+          <div data-ng-show="need_safekey" class="form-group has-feedback">
+            <input type="password" id="safekey" name="safekey" class="form-control" placeholder="{{langs.safekey}}"
+            data-ng-model="safekey" data-ng-keyup="loginKeyup($event)"
+            required>
+            <span class="fa fa-key form-control-feedback"></span>
+          </div>
+          
+          
+          <div class="row">
+            <div class="col-xs-8">
+              <div class="form-group">
+                <select class="form-control" id="language" name="language" data-ng-change="changeLang()" data-ng-model="language">
+                  <option value="zh-CN">简体中文</option>
+                  <option value="zh-TW">繁體中文</option>
+                  <option value="en-US">English</option>
+                </select>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-4">
+              <input type="button" id="login" data-ng-click="login()" class="btn btn-primary btn-block btn-flat" value="{{langs.login}}">
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+    
+      </div>
+      <!-- /.login-box-body -->
+      
+      <div class="text-center pull-right"><br/>{{langs.admin_versions}}</div>
+    
+    </div>
+
+</div><!-- /.wrapper -->
+
+
+<!-- 首次登录修改密码 -->
+<div  class="modal fade" id="mpwd_modal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-sm" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-danger text-center" id="myModalLabel">{{langs.first_login_force}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><!-- 空行 --></div>
+        <form name="changeForm" novalidate="novalidate">
+          <!-- newpasswd -->
+          <div class="form-group has-feedback"
+          data-ng-class="{'has-success': !changeForm.newpasswd.$pristine && changeForm.newpasswd.$valid && newpasswd != passwd, 
+          'has-error': changeForm.newpasswd.$dirty && (changeForm.newpasswd.$invalid || newpasswd == passwd)}">
+            <input type="password" id="newpasswd" name="newpasswd" class="form-control"
+            data-ng-minlength="8" data-ng-maxlength="12" data-ng-model="newpasswd" data-ng-keyup="changeKeyup($event)"
+            data-toggle="tooltip" title="{{langs.newpwd_tooltip}}" 
+            data-ng-pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])([\w\+=~!@#$%^&*]{5,})/" 
+            placeholder="{{langs.input_new_passwd_placeholder}}"
+            required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <label class="col-sm control-label text-danger" 
+            data-ng-show="changeForm.newpasswd.$dirty && changeForm.newpasswd.$error.minlength">{{langs.newpwd_min}}</label>
+            <label class="col-sm control-label text-danger" 
+            data-ng-show="changeForm.newpasswd.$dirty && changeForm.newpasswd.$error.maxlength">{{langs.newpwd_max}}</label>
+            <label class="col-sm control-label text-danger" 
+            data-ng-show="changeForm.newpasswd.$dirty && !changeForm.newpasswd.$error.maxlength && !changeForm.newpasswd.$error.minlength && newpasswd == passwd">{{langs.newpwd_not_same}}</label>
+            <label class="col-sm control-label text-danger" 
+            data-ng-show="changeForm.newpasswd.$dirty && !changeForm.newpasswd.$error.minlength && !changeForm.newpasswd.$error.maxlength && newpasswd != passwd && changeForm.newpasswd.$error.pattern">{{langs.newpwd_invalid}}</label>
+          </div>
+          <!-- vnewpasswd -->
+          <div class="form-group has-feedback"
+          data-ng-class="{'has-success': !changeForm.vnewpasswd.$pristine && changeForm.vnewpasswd.$valid && vnewpasswd == newpasswd, 'has-error': changeForm.vnewpasswd.$dirty && (changeForm.vnewpasswd.$invalid || vnewpasswd != newpasswd) }">
+            <input type="password" id="vnewpasswd" name="vnewpasswd" class="form-control"
+            data-ng-model="vnewpasswd" data-ng-keyup="changeKeyup($event)"
+            placeholder="{{langs.input_vnew_passwd_placeholder}}"
+            required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <label class="col-sm control-label text-danger" 
+            data-ng-show="changeForm.vnewpasswd.$dirty && vnewpasswd!=newpasswd">{{langs.vpwd_invalid}}</label>
+          </div>
+          <!-- newsafekey -->
+          <div data-ng-show="need_safekey" class="form-group has-feedback"
+          data-ng-class="{'has-success': changeForm.newsafekey.$dirty && changeForm.newsafekey.$valid && newsafekey != safekey, 
+          'has-error': changeForm.newsafekey.$dirty && changeForm.newsafekey.$invalid && newsafekey == safekey}">
+            <input type="password" id="newsafekey" name="newsafekey" class="form-control"
+            data-ng-model="newsafekey" data-ng-keyup="changeKeyup($event)"
+            data-ng-minlength="4" data-ng-maxlength="6" 
+            data-toggle="tooltip" title="{{langs.newsk_tooltip}} " 
+            data-ng-pattern="/^[a-zA-Z0-9]{4,6}$/"
+            placeholder="{{langs.input_new_safekey_placeholder}}"
+            required>
+            <span class="fa fa-key form-control-feedback"></span>
+            <label class="col-sm control-label text-danger"
+            data-ng-show="changeForm.newsafekey.$dirty && changeForm.newsafekey.$error.minlength">{{langs.newsk_min}}</label>
+            <label class="col-sm control-label text-danger"
+            data-ng-show="changeForm.newsafekey.$dirty && changeForm.newsafekey.$error.maxlength">{{langs.newsk_max}}</label>
+            <label class="col-sm control-label text-danger"
+            data-ng-show="changeForm.newsafekey.$dirty && newsafekey == safekey">{{langs.newsk_not_same}}</label>
+            <label class="col-sm control-label text-danger"
+            data-ng-show="changeForm.newsafekey.$dirty && !changeForm.newsafekey.$error.minlength && !changeForm.newsafekey.$error.maxlength && newsafekey != safekey && changeForm.newsafekey.$error.pattern">{{langs.newsk_invalid}}</label>
+          </div>
+          <!-- vnewsafekey -->
+          <div data-ng-show="need_safekey" class="form-group has-feedback"
+          data-ng-class="{'has-success': changeForm.vnewsafekey.$dirty && changeForm.vnewsafekey.$valid && vnewsafekey == newsafekey,
+          'has-error': changeForm.vnewsafekey.$dirty && (changeForm.vnewsafekey.$invalid || vnewsafekey != newsafekey) }">
+            <input type="password" id="vnewsafekey" name="vnewsafekey" class="form-control"
+            data-ng-model="vnewsafekey" data-ng-keyup="changeKeyup($event)"
+            placeholder="{{langs.input_vnew_safekey_placeholder}}"
+            required>
+            <span class="fa fa-key form-control-feedback"></span>
+            <label class="col-sm control-label text-danger"
+            data-ng-show="changeForm.vnewsafekey.$dirty && vnewsafekey!=newsafekey">{{langs.vsk_invalid}}</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-ng-click="forcepwd()">{{langs.submit}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- jQuery 3 -->
+<script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- jQuery cookie 1.4.1 -->
+<script src="lib/bower_components/jquery/dist/jquery.cookie.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="lib/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.7 -->
+<script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="lib/dist/js/adminlte.min.js"></script>
+
+<!--自定义js函数-->
+<script src="lib/bower_components/angular/angular.min.js"></script>
+<script src="lib/bower_components/angular/angular-touch.min.js"></script>
+<script src="js/api.config.js"></script>
+<script src="js/base.js"></script>
+<script src="js/index.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+{
+  "add_server": "新增区服",
+  "copy_add_server": "克隆",
+  
+  "modal_title_1": "新增区服",
+  "modal_title_2": "修改区服",
+  "modal_title_3": "复制新增区服",
+  
+  
+  "sid"   :  "区服ID",
+  "srv_name" :  "区服名称",
+  "srv_ip" :  "区服IP1",
+  "srv_ip2"  :  "区服IP2",
+  "optm"  :  "开服时间",
+  "opver"  :  "开服版本",
+  
+  "type"        :   "区服类型",
+  "type_all"    :   "所有类型",
+  "type_x"      :   {"0":"线上服", "1":"已合服", "2":"历史服", "3":"测试服"},
+  "type_display":   {"0":"线上服", "1":"已合服", "2":"历史服", "3":"测试服"},
+
+  "msg"     : "聊天日志",
+  "msg_x"   :   {"0":"关闭", "1":"开启"},
+  "msg_display" : {"1":"聊天"},
+  
+  "close"     : "入口状态",
+  "close_x"   :   {"0":"关闭", "1":"开启"},
+  "close_display" : {"1":"可入"},
+  
+  "def" : "默认标记",
+  "def_x":  {"0":"未设置", "1":"已设置"},
+  "def_display": {"1":"默认"},
+  
+  "new" : "新开标记",
+  "new_x":  {"0":"未设置", "1":"已设置"},
+  "new_display": {"1":"新开"},
+  
+  "recomm" : "推荐标记",
+  "recomm_x":  {"0":"未设置", "1":"已设置"},
+  "recomm_display":{"1":"推荐"},
+  
+  "srv_status" : "状态标记",
+  "srv_status_x":   {"0":"流畅", "1":"良好", "2":"拥挤", "3":"爆满", "4":"维护"},
+  "srv_status_display":   {"0":"流畅", "1":"良好", "2":"拥挤", "3":"爆满", "4":"维护"},
+
+  "srv_port" : "区服端口",
+  "game_port"  :  "游戏端口",
+  "srv_conf_port"  :  "配置端口",
+  "srv_prt_port"  :  "守护端口",
+
+  "gamedb" : "游戏数据库",
+  "gamedb_name"  :  "数据库名",
+  "gamedb_ip" :  "数据库IP",
+  "gamedb_user" :  "数据库用户名",
+  "gamedb_pwd"   :  "数据库密码",
+
+  "logdb" : "日志数据库",
+  "logdb_name"  :  "数据库名",
+  "logdb_ip" :  "数据库IP",
+  "logdb_user"  :  "数据库用户名",
+  "logdb_pwd"  :  "数据库密码",
+
+  "paydb" : "充值数据库",
+  "paydb_name"  :  "数据库名",
+  "paydb_ip"  :  "数据库IP",
+  "paydb_user"  :  "数据库用户名",
+  "paydb_pwd"  :  "数据库密码",
+
+  "kfdb" : "客服数据库",
+  "kfdb_name"  :  "数据库名",
+  "kfdb_ip"  :  "数据库IP",
+  "kfdb_user" :  "数据库用户名",
+  "kfdb_pwd"  :  "数据库密码",
+
+  "cq_root"  :  "服务端程序路径",
+  "static_url"  :  "游戏资源URL地址",
+  "web_static" :  "页面资源URL地址",
+
+  "iface_his"  :  "合服接口信息",
+  "combine_time" : "合服时间",
+  "combine_sid"  : "合服后SID",
+  "platids"  :  "所属平台",
+  "search_theads"     :  "查询字段",
+  
+  
+  "server_id_necessary" : "区服ID是必须的",
+  "server_id_tip" : "区服ID必须为正整数",
+  "url_tip" : "游戏路径地址及资源URL地址必须以/结尾",
+  "iface_his_tip" : "合服接口信息格式：'合服时间,历史服IP,历史服sid'，如果有多个合服信息，以半角;分割，最后不要带;",
+
+
+  "confirm_del_server_info"  : "确认删除此区服信息吗？", 
+  "error_100500":  "区服ID已存在",
+  "error_100501":  "区服信息删除失败",
+  
+  
+  "server_base": "基本信息",
+  "server_toggle": "功能开关",
+  "server_op": "开服相关",
+  "server_game_conf": "游戏配置",
+  "server_combine": "合服配置",
+  
+  "sid_invalid": "区服ID错误",
+  "sid_between_invalid": "区服ID必须在1-4294967295之间",
+  "sid_regexp_invalid": "区服ID必须是正整数",
+  "sid_not_empty": "区服ID不能为空",
+  
+  "srv_name_invalid": "区服名称错误",
+  "srv_name_stringLength_invalid": "区服名称最长只能为60位",
+  "srv_name_not_empty": "区服名称不能为空",
+  
+  "srv_ip_invalid": "区服IP错误",
+  "srv_ip_stringLength_invalid": "区服IP最长只能为60位",
+  "srv_ip_not_empty": "区服IP不能为空",
+  "sid_regexp_invalid": "区服IP格式错误",
+  "platids_not_empty": "所属平台不能为空",
+  "not_empty":"不能为空",
+  
+  "selected_srvs":"已选择区服",
+  
+  "test": ""
+}

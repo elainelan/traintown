@@ -1,0 +1,26 @@
+{
+    "login_message": "请先登录",
+    
+    "name": "用户名",
+    "name_input": "请输入用户名",
+    
+    
+    "passwd": "密码",
+    "passwd_input": "请输入密码",
+    
+    "safekey": "安全码",
+    "safekey_input": "请输入安全码",
+    
+    "login": "登录",
+    
+    "first_login_force" : "首次登录请修改密码",
+    
+    "input_new_passwd_placeholder" : "请输入新密码",
+    "input_vnew_passwd_placeholder": "请确认新密码",
+    
+    "input_new_safekey_placeholder" : "请输入新安全码",
+    "input_vnew_safekey_placeholder": "请确认新安全码",
+    
+    
+    "test":""
+}

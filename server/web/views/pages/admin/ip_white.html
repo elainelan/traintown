@@ -1,0 +1,172 @@
+
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="box">
+        
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+            
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{ langs.seq }}</th>
+                        <th>{{ langs.rec_id }}</th>
+                        <th data-toggle="tooltip" title="{{langs.platid_tooltip}}">{{ langs.platid }}<i class="fa fa-question-circle text-orange"></i></th>
+                        <th>{{ langs.white_ip }}</th>
+                        <th>{{ langs.notes }}</th>
+                        <th data-ng-if="headfunc.manager">{{ langs.operation }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="x in data.items">
+                        <td>{{ $index + 1 + (data.page_current-1)* data.items_per_page }}</td>
+                        
+                        <td>{{ x.id }}</td>
+                        
+                        <td data-ng-if="x.platid!=0">{{ x.platid + ' : ' + platforms[x.platid].name }}</td>
+                        <td data-ng-if="x.platid==0">{{ x.platid + ' : ' + langs.plat_0 }}</td>
+                        
+                        <td>{{ x.ip }}</td>
+                        <td data-ng-if="!x.edit">{{ x.notes }}</td>
+                        <td data-ng-if="x.edit && headfunc.manager"><input type="text" class="form-control" name="" id="mod_notes" data-ng-model="x.notes"></td>
+                        <td data-ng-if="headfunc.manager" style="min-width: 96px;">
+                            <button data-ng-if="!x.edit"
+                                    data-ng-click="mod(x)" title="{{ langs.mod }}" class="pull-left btn btn-warning btn-sm btn-func">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </button>
+                            <button data-ng-if="x.edit"
+                                    data-ng-click="mod_ok(x)" title="{{ langs.save }}" class="pull-left btn btn-success btn-sm btn-func">
+                                <i class="fa fa-save"></i>
+                            </button>
+                            <button data-ng-if="x.edit"
+                                    data-ng-click="mod_cancel(x)" title="{{ langs.cancel }}" class="pull-left btn btn-default btn-sm btn-func" >
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <button data-ng-if="!x.edit"
+                                    data-ng-click="modal_del(x)" title="{{ langs.del }}" class="pull-left btn btn-danger btn-sm btn-func">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+                <!-- pages/common/box-footer.html -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 模态框（添加） -->
+<div class="modal fade" id="modal_add" name="modal_add" role="dialog" aria-labelledby="modal_add" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ langs.add_new_white_ip }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="modal_add_form" name="modal_add_form" novalidate="novalidate">
+                    <div class="row">
+                        
+                        <!-- 平台 -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platid }}:</label>
+                            <div class="col-sm-7">
+                                <select class="form-control select2" id="add_select2" tabindex="-1" data-ng-model="add.platid" style="width:100%">
+                                    <option data-ng-if="users.data.platid=='0'" value="0">{{ '0 : ' + langs.plat_0 }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 白名单IP -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.white_ip }}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="add_ip" name="add_ip" data-ng-model="add.ip"
+                                    data-toggle="tooltip" title="{{ langs.white_ip_tooltip }}"
+                                    placeholder="{{ langs.white_ip_placeholder }}"
+                                    >
+                            </div>
+                        </div>
+                        <!-- 备注 -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.notes }}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="add_notes" name="add_notes" data-ng-model="add.notes"
+                                    placeholder="{{ langs.notes_placeholder }}"
+                                    >
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_add_ok()">{{ langs.submit }}</button>
+                <button type="button" class="btn btn-warning" data-ng-click="modal_add_reset()">{{ langs['reset'] }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!-- 模态框（查找） -->
+<div class="modal fade" id="modal_search" name="modal_search" role="dialog" aria-labelledby="modal_search" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="modal_search_form" name="modal_search_form" novalidate="novalidate">
+                    <div class="row">
+                        <!-- 平台 -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platid }}:</label>
+                            <div class="col-sm-7">
+                                <select class="form-control select2" tabindex="-1" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.platid" style="width:100%">
+                                    <option value="">{{ langs.plat_all }}</option>
+                                    <option data-ng-if="users.data.platid=='0'" value="0">{{ '0 : ' + langs.plat_0 }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 白名单IP -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.white_ip }}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="search_white_ip" name="search_white_ip" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.ip" placeholder="{{langs.search_white_ip_placeholder}}">
+                            </div>
+                        </div>
+                        <!-- 备注 -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.notes }}:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="search_notes" name="search_notes" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.notes" placeholder="{{langs.search_notes_placeholder}}">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_search_ok()">{{ langs.modal_search_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（删除确认） -->
+<data-ng-include src="'pages/common/modal_del.html'">
+    <!-- pages/common/modal_del.html -->
+</data-ng-include>
+
+

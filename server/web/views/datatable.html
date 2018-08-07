@@ -1,0 +1,25 @@
+<table class="table table-hover">
+    <caption>测试数据</caption>
+    <thead>
+    <tr>
+        <th data-ng-repeat="x in datas.show">
+            {{x}}
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="x in datas.data">
+        <td data-ng-repeat="(key,value) in x" data-ng-if="key!='edit'">
+            <span data-ng-if="!x.edit" style="display:inline-block;width:100px;height: 26px">{{value}}</span>
+            <input data-ng-if="x.edit" style="width:100px;height: 26px" class="form-control" type="text" data-ng-model="x[key]">
+        </td>
+        <td>
+            <input type="button" value="修改" data-ng-if="!x.edit" data-ng-click="x.edit=true" class="btn btn-primary">
+            <input type="button" value="保存" data-ng-if="x.edit" data-ng-click="x.edit=false" class="btn btn-primary">
+        </td>
+    </tr>
+    </tbody>
+</table>

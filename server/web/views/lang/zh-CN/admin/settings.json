@@ -1,0 +1,50 @@
+{
+  "weixin_settings"  :  "微信企业号配置",
+  
+  "weixin_corpid" :  "企业ID",
+  "weixin_corpid_placeholder": "微信企业号的企业ID",
+  "weixin_corpid_tooltip": "微信企业号的企业ID",
+  
+  "weixin_agentid": "agentId",
+  "weixin_agentid_placeholder": "企业应用agentId",
+  "weixin_agentid_tooltip": "企业应用agentId",
+  
+  "weixin_agentsecret": "Secret",
+  "weixin_agentsecret_placeholder": "企业应用agentId对应的Secret",
+  "weixin_agentsecret_tooltip": "企业应用agentId对应的Secret",
+  
+  
+  "weixin_service_settings"  :  "微信服务号配置",
+  
+  "weixin_service_appid" :  "开发者ID",
+  "weixin_service_appid_placeholder": "微信服务号的企业AppID",
+  "weixin_service_appid_tooltip": "微信服务号的企业AppID",
+  
+  
+  "weixin_service_appsecret": "开发者密码",
+  "weixin_service_appsecret_placeholder": "微信服务号的企业AppSecret",
+  "weixin_service_appsecret_tooltip": "微信服务号的企业AppSecret",
+  
+  
+  "weixin_service_login_template_id": "登录提示模板ID",
+  "weixin_service_login_template_id_placeholder": "微信服务号后台：功能->添加功能插件处看到申请模板消息功能中对应的模板ID",
+  "weixin_service_login_template_id_tooltip": "微信服务号后台：功能->添加功能插件处看到申请模板消息功能中对应的模板ID",
+  
+  "weixin_service_game_admin_name": "服务号显示后台名称",
+  "weixin_service_game_admin_name_placeholder": "发送微信提示消息时显示的后台名称",
+  "weixin_service_game_admin_name_tooltip": "发送微信提示消息时显示的后台名称",
+  
+  "weixin_service_callback_ip": "回调服务器IP",
+  "weixin_service_callback_ip_placeholder": "微信回调中转服务器的IP",
+  "weixin_service_callback_ip_tooltip": "微信回调中转服务器的IP",
+  
+  "weixin_service_callback_seq": "回调后台编号",
+  "weixin_service_callback_seq_placeholder": "微信回调中转服务器回调的编号",
+  "weixin_service_callback_seq_tooltip": "微信回调中转服务器回调的编号",
+  
+  "save_succ": "保存成功",
+  
+  
+  "test": ""
+  
+}

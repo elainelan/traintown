@@ -1,0 +1,2 @@
+process.nextTick(B); // 插入当前事件之后
+setImmediate(B); // 插入当前等待队列最后

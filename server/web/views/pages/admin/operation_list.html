@@ -1,0 +1,120 @@
+
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+
+        <div class="box">
+        
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+            
+            
+            <div class="box-body" data-ng-include="'pages/common/box-body.html'">
+                <!-- pages/common/box-body.html -->
+            </div>
+            
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+                <!-- pages/common/box-footer.html -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（查找） -->
+<div class="modal fade" id="modal_search" name="modal_search" role="dialog" aria-labelledby="modal_search" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="modal_search_form" novalidate="novalidate">
+                    <div class="row">
+                        <!-- platid -->
+                        <div class="form-group col-sm-10 col-sm-offset-1" data-ng-view="platid">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.operation_plat }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control select2" tabindex="-1" data-ng-change="modal_search_platform()" data-ng-model="search.platid" style="width:100%">
+                                    <option value="">{{ langs.plat_all }}</option>
+                                    <option data-ng-if="users.data.platid=='0'" value="0">{{ '0 : '+langs.plat_0 }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- username -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.operation_username }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control select2" tabindex="-1" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.userid" style="width:100%">
+                                    <option value="">{{ langs.user_all }}</option>
+                                    <option data-ng-repeat="(userid,x) in admin_users" value="{{ x.id }}" data-ng-if="!search.platid || x.platid==search.platid">
+                                        {{ x.id+' : '+x.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <!-- tm -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.operation_tm }}：</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-left" id="search_time" name="search_time" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.tm">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ip -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.operation_ip }}：</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="ip" name="ip" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.ip" placeholder="{{langs.search_ip_placeholder}}">
+                            </div>
+                        </div>
+                        
+                        <!-- uri -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.operation_function }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control select2" tabindex="-1" data-ng-change="modal_search_title_not_submit()" id="uri" data-ng-model="search.uri" style="width:100%">
+                                   <option value="" >{{ langs.operation_uri_all }}</option>
+                                   <option data-ng-repeat="v in tree_menu" value="{{ v.uri }}" >{{ v.repeat }}&nbsp;{{ langs['tree_'+v.uri] }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- sucess -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.operation_res }}：</label>
+                            <div class="col-sm-7">
+                                <select type="text" class="form-control" id="uri" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.res">
+                                    <option value="" >{{ langs.operation_res_all }}</option>
+                                    <option value="1" >{{ langs.operation_res_1 }}</option>
+                                    <option value="0" >{{ langs.operation_res_0 }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- detail -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label"></label>
+                            <div class="col-sm-7">
+                                <input type="checkbox" class="iCheck-helper" id="detail1" data-ng-change="modal_search_title_not_submit()" data-ng-model="detail">&nbsp;&nbsp;{{ langs.operation_detail }}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_search_ok()">{{ langs.modal_search_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

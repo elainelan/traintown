@@ -1,0 +1,19 @@
+
+修改： 
+<i class="fa fa-pencil-square-o"></i>
+
+管理： 
+<i class="fa fa-wrench"></i>
+
+删除： 
+<i class="fa fa-times"></i>
+
+保存： 
+<i class="fa fa-save"></i>
+
+
+
+操作选项的td的min-width计算方法，特别注意：有些图标不标准，需要适当增加/减少px
+47px * 按钮数 = min-width  
+
+1: 47px    2: 94px    3: 141px

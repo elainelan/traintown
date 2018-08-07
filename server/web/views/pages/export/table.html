@@ -1,0 +1,79 @@
+<form class="form-horizontal" role="form" name="myForm" id="myForm" novalidate="novalidate">
+<div class="box">
+    <div class="box-header"></div>
+    
+    <div data-ng-include="'pages/common/plat-server-select.html'"></div>
+    
+    <div class="box-body no-padding">
+        <div class="form-group col-sm-12">
+             <!-- 数据库 -->
+             <div class="form-group col-sm-12" >
+                 <label class="col-sm-6 control-label">{{langs.export_db}}:</label>
+                 <div class="col-sm-3 col-lg-2">
+                     <select id="db_name" class="form-control select2" name="db_name" data-ng-model="search.db_type">
+                        <option data-ng-repeat="x in db_table_conf.db" data-repeat-finish="select2_init()">{{x}}</option>
+                     </select>
+                 </div>
+             </div>
+             <!-- 表 -->
+             <div class="form-group col-sm-12" >
+                 <label class="col-sm-6 control-label">{{langs.export_db}}:</label>
+                 <div class="col-sm-3 col-lg-2">
+                     <select id="table_name" class="form-control select2" name="table_name" data-ng-model="search.table_name">
+                        <option data-ng-if="x.db_type==search.db_type" data-ng-repeat="x in db_table_conf.table" data-repeat-finish="select2_init()">{{x.table_name}}</option>
+                     </select>
+                 </div>
+             </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <hr>
+        </div>
+    </div>
+    
+    <div class="box-body no-padding">
+      
+      <div class="form-group col-sm-12">
+	      <div align="center" class="col-sm-8 col-sm-offset-2">
+	        <button class="btn btn-default btn-flat" data-ng-click="download()" ng-disabled="!search.db_type || !search.table_name || !is_selected_srv($root.selected_srvs)">
+	            <i class="fa fa-gg text-success"></i>
+	            {{ langs.export }}
+	        </button>
+	      </div>
+      </div>
+        
+        <div class="col-sm-12">
+            <hr>
+        </div>
+    </div>
+
+    <div class="box-footer">
+    </div>
+</div>
+</form>
+
+<!-- 正在下载模态框 -->
+<div class="modal fade" id="modal_export" role="dialog" aria-labelledby="modal_export" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-success" >{{ langs.modal_export_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center text-success">
+                        {{ langs.export_watting }} &nbsp;<i class="fa fa-spinner fa-pulse"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >{{ langs.modal_del_ok }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+  

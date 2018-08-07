@@ -1,0 +1,21 @@
+{
+  "user_id":"用户id",
+  "role_id":"角色id",
+  "username":"使用者",
+  "user_all":"所有使用者",
+  "username_tooltip": "账号ID : 使用者",
+  "platform":"所属平台",
+  "platform_tooltip": "所属平台ID : 所属平台名称",
+  "role_name":"所属角色",
+  "role_name_tooltip":"[所属角色ID]所属角色名称",
+  
+  "pri_id":"权限id",
+  "addrole":"添加角色",
+  "confirm_del_role":"确定移除该角色吗？",
+  "no_role_to_user":"没有角色可赋予了！",
+  
+  "plat_0":"跨平台",
+  
+  
+  "test":""
+}

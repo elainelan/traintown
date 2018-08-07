@@ -1,0 +1,43 @@
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="box">
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+            
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            
+                            
+                            <!-- ======表格头====== -->
+                            <th class="col-xs-1">{{ langs.seq }}</th>
+                            <th class="col-xs-5">{{ langs.login_time }}</th>
+                            <th class="col-xs-2">{{ langs.login_ip }}</th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="x in data.items">
+                            
+                            
+                            <!-- ======表格内容====== -->
+                            <td>{{ $index + 1 + (data.page_current-1)* data.items_per_page }}</td>
+                            <td>{{ x.logintime*1000 | date:"yyyy-MM-dd HH:mm:ss" }}</td>
+                            <td>{{ x.loginip }}</td>
+                            
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+                <!-- pages/common/box-footer.html -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        
+        <form class="form-horizontal" role="form" name="myForm" id="myForm" novalidate="novalidate">
+        
+            <div class="box">
+                <div class="box-header" ></div>
+                
+                <div class="box-body no-padding">
+                    <!-- oldpwd -->
+                    <div class="form-group col-sm-10">
+                        <label class="col-sm-5 control-label">{{langs.oldpwd}}:</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="oldpwd" name="oldpwd"
+                            data-ng-model="oldpwd" data-ng-change="change_password()"
+                            data-toggle="tooltip" title="{{langs.oldpwd_tooltip}}"
+                            placeholder="{{langs.oldpwd_placeholder}}"
+                            >
+                        </div>
+                    </div>
+                    <!-- newpwd -->
+                    <div class="form-group col-sm-10" data-ng-show="myForm.oldpwd.$dirty">
+                        <label class="col-sm-5 control-label">{{langs.newpwd}}:</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="newpwd" name="newpwd"
+                            data-ng-model="newpwd" data-ng-change="change_password()"
+                            data-toggle="tooltip" title="{{langs.newpwd_tooltip}}" 
+                            placeholder="{{langs.newpwd_placeholder}}" 
+                            >
+                        </div>
+                    </div>
+                    <!-- vpwd -->
+                    <div class="form-group col-sm-10" data-ng-show="myForm.oldpwd.$dirty">
+                        <label class="col-sm-5 control-label">{{langs.vpwd}}:</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="vpwd" name="vpwd"
+                            data-ng-model="vpwd" data-ng-change="change_password()"
+                            placeholder="{{langs.vpwd_placeholder}}"
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <hr/>
+                    </div>
+                    
+                    <!-- oldsk -->
+                    <div class="form-group col-sm-10">
+                        <label class="col-sm-5 control-label">{{langs.oldsk}}:</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="oldsk" name="oldsk"
+                            data-ng-model="oldsk" data-ng-change="change_safekey()"
+                            data-toggle="tooltip" title="{{langs.oldsk_tooltip}}"
+                            placeholder="{{langs.oldsk_placeholder}}"
+                            >
+                        </div>
+                    </div>
+                    <!-- newsk -->
+                    <div class="form-group col-sm-10" data-ng-show="myForm.oldsk.$dirty">
+                        <label class="col-sm-5 control-label">{{langs.newsk}}:</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="newsk" name="newsk"
+                            data-ng-model="newsk" data-ng-change="change_safekey()"
+                            data-toggle="tooltip" title="{{langs.newsk_tooltip}} " 
+                            placeholder="{{langs.newsk_placeholder}}"
+                            >
+                        </div>
+                    </div>
+                    <!-- vsk -->
+                    <div class="form-group col-sm-10" data-ng-show="myForm.oldsk.$dirty">
+                        <label class="col-sm-5 control-label">{{langs.vsk}}:</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="vsk" name="vsk"
+                            data-ng-model="vsk" data-ng-change="change_safekey()"
+                            placeholder="{{langs.vsk_placeholder}}"
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer box-tools">
+                    <div class="form-group">
+                        <p class="text-center">
+                            <button data-ng-click="submit_form()" type="submit" class="btn btn-primary">{{langs.submit}}</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

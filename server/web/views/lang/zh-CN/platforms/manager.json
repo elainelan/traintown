@@ -1,0 +1,116 @@
+{  
+  "platform_add"  :  "新增平台",
+  "platform_mod"  :  "修改平台",
+  "platform_table"  :  "平台信息表",
+  "reset" : "重置",
+  "close" : "关闭",
+  
+  "add_auto_create_game_sig"  : "自动生成",
+  "add_auto_create_game_sig_tooltip"  : "如果留空，会自动生成32位KEY",
+  "clear_game_sig": "清除",
+  "add_auto_create_pay_sig"  : "自动生成",
+  "add_auto_create_pay_sig_tooltip"  : "如果留空，会自动生成32位KEY",
+  "clear_pay_sig": "清除",
+  
+  "submit_platform" : "提交",
+
+  "platform_base": "基础信息",
+  "platform_toggle": "功能开关",
+  "platform_others": "其他功能",
+  "platform_urls": "URL链接地址",
+  "platform_phone": "手游配置",
+
+  "platid"   :  "平台ID",
+  "platform_id"   :  "平台ID",
+  "platid_placeholder": "正整数，1-65534",
+  "platname" :  "平台名称",
+  "platname_placeholder": "11个字符以内",
+  "game_sig" :  "登录KEY",
+  "pay_sig"  :  "支付KEY",
+  "close_tm"  :  "停运时间",
+  "close_tm_placeholder": "平台停止运营时间",
+  
+  
+  
+  "ptoolbar"  :  "页面导航栏",
+  "select_close"  :  "关闭",
+  "select_open"  :  "开启",
+  "safe"  :  "账号保护",
+  "pfcm"  :  "防沉迷",
+  "onbeforeunload"  :  "页面退出提示",
+  "forcein"   :  "自动创角",
+  "automis"   :  "自动任务",
+  
+  
+  
+  
+  "miniurl" :  "微端下载",
+  "miniurl_placeholder": "平台方微端下载地址，http://xxx.com/mini.zip",
+  "mini_login"  :  "微端登录",
+  "mini_login_placeholder": "平台方微端登录地址，http://xx.com/login.php",
+  "mini_ver"  :  "微端版本",
+  "mini_ver_placeholder": "微端版本号，1.0.0.5",
+  "supervip_config": "平台超级会员",
+  "supervip_config_placeholder": "相关平台的超级会员功能配置",
+  "supervip_config_tooltip": "<div align=\"left\" style=\"word-wrap:break-word\">Json字符串，充值金额单位为元<br/>月累计充值金额(mth_pay)<br/>日累计充值金额(day_pay)<br/>单笔充值金额(single_pay)<br/>例: {\"mth_pay\":2000,\"day_pay\":1000,\"single_pay\":500}<br/></div>",
+  
+  
+  
+  
+  "weburl"  :  "官网",
+  "weburl_placeholder": "平台方的游戏官网地址，http://xxx.xx.com/",
+  "bbsurl"  :  "论坛",
+  "bbsurl_placeholder": "平台方的游戏论坛地址，http://bbs.xx.com/",
+  "gmurl"   :  "客服",
+  "gmurl_placeholder": "平台方的客服地址，http://kf.xx.com/",
+  "cmurl"   :  "反沉迷补填",
+  "cmurl_placeholder": "平台方的防沉迷信息补填地址，http://fcm.xx.com",
+  "newcardurl"  :  "新手卡领取",
+  "newcardurl_placeholder": "平台方的新手卡领取页面地址，http://xsk.xx.com",
+  "phone_url" :  "手机验证",
+  "phone_url_placeholder": "平台方手机验证访问地址，http://ph.xx.com",
+  
+  "fcmurl"  :  "反沉迷信息接收接口地址",
+  
+  
+  
+  
+
+  
+  
+
+
+  
+  "pay_pre_num_pct"   :  "人数百分比[0-99]",
+  "pay_pre_pay_pct"   :  "金额百分比[0-99]",
+  "pay_pre_pay1"   :  "金额阀值1",
+  "pay_pre_pay2"   :  "金额阀值2",
+  "sj_test"   :  "手游测试UID",
+  "sj_pid"    :  "手游平台名称",
+
+  "platform_id_invalid": "平台ID错误",
+  "platform_id_not_empty" : "平台ID不能为空",
+  "platform_id_regexp_invalid": "平台ID必须为正整数",
+  "platform_id_between_invalid": "平台ID范围1-65534",
+  "platform_id_tooltip" : "平台ID必须为正整数，数值范围1-65534",
+  
+  "platform_name_invalid": "平台名称错误",
+  "platform_name_not_empty" : "平台名称不能为空",
+  "platform_name_stringLength_invalid": "平台名称不能超过11个字符",
+  "platform_name_tooltip" : "平台名称不能超过11个字符",
+  
+  "platform_game_sig_tooltip": "修改后需要重新对接登录相关接口，请谨慎！",
+  "platform_pay_sig_tooltip": "修改后需要重新对接充值相关接口，请谨慎！",
+  
+  "platform_uid_phone_tip"  : "手机测试帐号UID和手机平台名称，如果多个需要用','连接",
+  "platform_safecode_tip"  : "安全码必须32位字符长度，注意：修改后，平台需要重新对接，请谨慎修改！",
+
+  "confirm_del_plat_info"  : "确认删除此平台信息吗？",
+  
+  "error_100202": "平台已存在",
+  "error_100203": "平台信息删除失败",
+  "error_100204": "平台信息修改失败",
+  
+  
+  "test": ""
+}

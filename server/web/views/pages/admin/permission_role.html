@@ -1,0 +1,115 @@
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="box">
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{langs['seq']}}</th>
+                        <th data-toggle="tooltip" title="{{langs.role_name_tooltip}}">{{ langs.role_name }}<i class="fa fa-question-circle text-orange"></i></th>
+                        <th data-toggle="tooltip" title="{{langs.username_tooltip}}">{{ langs.username }}<i class="fa fa-question-circle text-orange"></i></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="x in data.items">
+                        <td>{{ $index + 1 + (data.page_current-1)* data.items_per_page }}</td>
+                        <td>{{x.role_id+' : '+x.role_name}}</td>
+                        <td>
+                            <span data-ng-repeat="m in x.uidnames">
+                                    <button data-ng-if="(m|baoliu) ==0 && pri.manager"
+                                            class="pull-left spandel btn btn-default btn-sm btn-func"
+                                            data-ng-class="{true: 'spandel btn btn-danger', false: 'spandel btn btn-default'}[isMouseEnter] "
+                                            data-ng-mouseover="isMouseEnter=true"
+                                            data-ng-mouseleave="isMouseEnter=false"
+                                            data-ng-click="modal_del(x.role_id,m)">
+                                    {{ m | diantokuo}}&nbsp; <span class="x_class"><i class="fa fa-remove"></i></span>
+                                    </button>
+                                    <button data-ng-if="(m|baoliu) ==1 || ! pri.manager"
+                                            class="pull-left spandel btn btn-default btn-sm btn-func">
+                                    {{ m | diantokuo}}
+                                    </button>
+                            </span>
+                            <button data-ng-if="pri.manager" data-ng-click="modal_add(x)"
+                                   title="{{langs.adduser}}" class="pull-left btn btn-primary btn-sm btn-func btn-func-margin">
+                                   <i class="fa fa-user-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 模态框（添加） -->
+<div class="modal fade" id="modal_add" name="modal_add" role="dialog" aria-labelledby="modal_add" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{{ langs['adduser'] }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6" data-ng-repeat="x in users">
+                        <label>
+                            <input type="checkbox" value="{{x.id}}"
+                                   data-ng-checked="isSelected(x.id)"
+                                   ng-click="modal_add_checked($event,x)">{{'['+x.id+']'+x.name}}
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="role_sub_id" data-ng-click="modal_add_ok()">{{ langs['submit']}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs['modal_close_btn']}}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（查找） -->
+<div class="modal fade" id="modal_search" name="modal_search" role="dialog" aria-labelledby="modal_search" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="modal_search_form" name="modal_search_form" novalidate="novalidate">
+                    <div class="row">
+                        <!-- 角色名-->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.role_name }}:</label>
+                            <div class="col-sm-7">
+                                <select class="form-control select2" tabindex="-1" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.role_id" style="width:100%">
+                                    <option value="">{{ langs.role_all }}</option>
+                                    <option data-ng-repeat="x in admin_roles" value="{{ x.id }}">{{ x.id+' : '+x.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_search_ok()">{{ langs.modal_search_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（删除确认） -->
+<data-ng-include src="'pages/common/modal_del.html'">
+    <!-- pages/common/modal_del.html -->
+</data-ng-include>

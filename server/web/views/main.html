@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{langs.admin_projects}} | {{ navtag.join(" > ") }}</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="lib/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="lib/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="lib/bower_components/bootstrap-validator/css/bootstrapValidator.min.css">
+    <link rel="styleSheet" href="lib/bower_components/angular-ui-grid/ui-grid.min.css"/>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="lib/dist/css/googleapis.css">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+<div class="wrapper" data-ng-controller="userCtrl" id="mainPage">
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="javascript:void(0)" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>{{langs.admin_projects_mini}}</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>{{langs.admin_projects}}</b></span>
+        </a>
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a href="javascript:void(0);" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="lib/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{users.data.name}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="lib/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <p>
+                                    <small>{{langs.last_login_time}}</small>
+                                    {{users.data.lastlogin*1000 |date:"yyyy-MM-dd HH:mm:ss"}}
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    
+                                    <a href="javascript:void(0)" data-ng-if="users.data.wx_bind_button" data-ng-click="modal_bind()" class="btn btn-default btn-flat">
+                                        <i class="fa fa-weixin text-success"></i>
+                                        <span>{{ langs.bind_wechat }}</span>
+                                    </a>
+                                    
+                                    <a href="#welcome" class="btn btn-default btn-flat">
+                                       <i class="fa fa-question-circle-o text-orange"></i>
+                                       <span>{{langs.help}}</span>
+                                    </a>
+                                    
+                                    <a href="javascript:void(0)" data-ng-click="signout()" class="btn btn-default btn-flat">
+                                       <i class="fa fa-power-off text-danger"></i>
+                                       <span>{{langs.sign_out}}</span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div ng-include="'leftmenu.html'"></div>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li data-ng-if="navtag">{{langs.base_nav}}</li>
+                <li data-ng-repeat="x in navtag">{{x}}</li>
+            </ol>
+        </section>
+        <section class="content" style="margin-top: 30px" ui-view>
+        </section>
+    </div>
+    <!-- Main Footer -->
+    <footer class="main-footer hidden-xs">
+        <div class="pull-right">
+            {{langs.admin_versions}}
+        </div>
+        <strong>Copyright &copy; 2016-2017 <a href="http://www.quweigames.com" target="_blank">趣味网络</a>.</strong> All rights reserved.
+    </footer>
+
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title {{modalClass.title}}" id="myModalLabel">
+                    {{langs.modal_title}}
+                </h4>
+            </div>
+            <div class="modal-body text-center {{modalClass.info}}">
+                {{langs.modal_info}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn {{modalClass.btn}}" data-dismiss="modal">{{langs.modal_close_btn}}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!-- 模态框（绑定微信） -->
+<div class="modal fade" id="modal_bind" role="dialog" aria-labelledby="modal_del" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-success" >{{ langs.modal_bind_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div id="content_img" class="text-center">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" >{{ langs.modal_del_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" >{{ langs.modal_del_cancel }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!-- jQuery 3 -->
+<script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- jQuery cookie 1.4.1 -->
+<script src="lib/bower_components/jquery/dist/jquery.cookie.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="lib/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- Slimscroll -->
+<script src="lib/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.7 -->
+<script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+<!-- AdminLTE App -->
+<script src="lib/dist/js/adminlte.min.js"></script>
+
+<!--自定义js函数-->
+<script src="lib/bower_components/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<script src="lib/bower_components/angular/angular.min.js"></script>
+<script src="lib/bower_components/angular-ui-router/angular-ui-router.min.js"></script>
+<script src="lib/bower_components/angular-ocLazyLoad/dist/ocLazyLoad.min.js"></script>
+<script src="lib/bower_components/angular/angular-touch.min.js"></script>
+<script src="lib/bower_components/angular/angular-animate.min.js"></script>
+<script src="lib/bower_components/angular-ui-grid/ui-grid.min.js"></script>
+
+
+<script src="js/api.config.js"></script>
+<script src="js/base.js"></script>
+<script src="js/app.js"></script>
+<script src="js/route.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

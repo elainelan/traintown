@@ -1,0 +1,50 @@
+<!--
+ng-include后：
+    1、该文件里面的$scope是新建的，变量都是本作用域使用，如果需要使用本页面之外的变量，应该“ $parent.变量名 ”引用
+    2、本页面外的对象不需要使用$parent，可直接使用，例如：data.page_current
+-->
+<div data-ng-if="data.page_total" class="box-tools pull-right">
+    <ul class="pagination pagination-sm inline">
+        <!-- 首页 -->
+        <li>
+            <a data-ng-if="data.page_current==1" href="javascript:void(0)" title="{{langs.box_footer_page_first}}"><i class="fa fa-angle-double-left"></i></a>
+            <a data-ng-if="data.page_current!=1" href="javascript:void(0)" title="{{langs.box_footer_page_first}}" data-ng-click="jump(1)"><i class="fa fa-angle-double-left"></i></a>
+        </li>
+        
+        <!-- 前2页 -->
+        <li data-ng-if="data.page_current+1>data.page_total && data.page_current>2">
+            <a href="javascript:void(0)" data-ng-click="jump(data.page_current-2)">{{data.page_current-2}}</a>
+        </li>
+        
+        <!-- 前1页 -->
+        <li data-ng-if="data.page_current>1">
+            <a href="javascript:void(0)" data-ng-click="jump(data.page_current-1)">{{data.page_current-1}}</a>
+        </li>
+        
+        <!-- 当前页 -->
+        <li class="active">
+            <a href="javascript:void(0)" >{{data.page_current}}</a>
+        </li>
+        
+        <!-- 后1页 -->
+        <li data-ng-if="data.page_current+1<=data.page_total">
+            <a href="javascript:void(0)" data-ng-click="jump(data.page_current+1)">{{data.page_current+1}}</a>
+        </li>
+        
+        <!-- 后2页 -->
+        <li data-ng-if="data.page_current<=1 && data.page_current+2<=data.page_total">
+            <a href="javascript:void(0)" data-ng-click="jump(data.page_current+2)">{{data.page_current+2}}</a>
+        </li>
+        
+        <!-- 尾页 -->
+        <li>
+            <a data-ng-if="data.page_current==data.page_total" href="javascript:void(0)" title="{{langs.box_footer_page_last}}"><i class="fa fa-angle-double-right"></i></a>
+            <a data-ng-if="data.page_current!=data.page_total" href="javascript:void(0)" title="{{langs.box_footer_page_last}}" data-ng-click="jump(data.page_total)"><i class="fa fa-angle-double-right"></i></a>
+        </li>
+    </ul>
+    &nbsp;&nbsp;
+    <input type="text" class="inline go_page_input" id="go_page" data-ng-model="$parent.$parent.go_page" size="{{data.page_total>=1000000 ? 4 : (data.page_total>=10000 ? 3 : (data.page_total>=100 ? 2 : 1))}}">
+    &nbsp;/&nbsp;{{data.page_total}}&nbsp;&nbsp;
+    <button data-ng-if="$parent.go_page == data.page_current" class="btn btn-info btn-sm" title="{{langs.box_footer_page_go}}"><i class="fa fa-arrow-right"></i></button>
+    <button data-ng-if="$parent.go_page != data.page_current" class="btn btn-info btn-sm" data-ng-click="jump($parent.go_page)" title="{{langs.box_footer_page_go}}"><i class="fa fa-arrow-right"></i></button>
+</div>

@@ -1,0 +1,208 @@
+﻿{
+
+  "modal_close_btn":"关闭",
+  
+  "modal_del_header": "确认信息",
+  "modal_bind_header": "扫描二维码绑定微信",
+  "modal_del_body": "确认删除吗？",
+  "modal_del_ok": "确定",
+  "modal_del_cancel": "取消",
+  
+  "modal_search_header": "请输入查询条件",
+  "modal_search_ok": "查找",
+  
+  "box_header_search_title": "查找",
+  "box_header_print_title": "打印",
+  "box_header_download_title": "下载全部数据",
+  "box_header_add_title": "新增",
+  "box_header_export_title":"导出当页数据",
+  
+  
+  
+
+  "succ_title": "成功提示",
+  "error_title": "错误提示",
+  "error_code": "错误代码：",
+  
+  "error_1000": "数据库异常",
+  "error_1001": "错误的指令",
+  "error_1002": "错误的模组",
+  "error_1003": "错误的方法",
+  "error_1004": "请在小黑屋休息一下",
+  "error_1005": "您访问太频繁了，请休息一下",
+  "error_1006": "禁止访问哦",
+  
+  "error_1101": "参数错误",
+  "error_1102": "加锁失败",
+  
+  "error_1201": "导出目录创建失败",
+  "error_1202": "导出文件创建/打开失败",
+  "error_1203": "写入导出数据失败",
+  "error_1204": "没有 数据可以导出",
+  "error_1205": "数据导出失败",
+  "error_1206": "数据文件压缩失败",
+  "error_1207": "系统繁忙，请稍后重试！",
+  
+  "error_100001": "用户名或密码或安全码错误!",
+  "error_100002": "您还未登录，请先登录",
+  "error_100003": "首次登录请先修改密码",
+  "error_100004": "登录需要验证安全码",
+  "error_100005": "登出失败",
+  "error_100006": "您的账号登录过期了，请重新登录",
+  
+  
+  "error_100100": "密码不符合要求",
+  "error_100101": "旧密码错误",
+  "error_100102": "安全码不符合要求",
+  "error_100103": "旧安全码错误",
+  
+  "error_100200": "平台ID错误",
+
+  "last_login_time": "最近一次登录时间",
+  "sign_out": "退出",
+  "help": "帮助",
+
+  "base_nav": "当前位置",
+  
+  "bind_wechat": "绑定微信",
+  "reset":"重置",
+  "search": "查询",
+  "add": "添加",
+  "del": "删除",
+  "mod": "修改",
+  "save": "保存",
+  "submit": "提交",
+  "click_back": "返回",
+  "seq":"序号",
+  "rec_id": "记录ID",
+  "operation":"操作",
+  "confirm":"确定",
+  "confirm_info":"确认信息",
+  "cancel":"取消",
+  "has_moded":"请先保存或取消正在修改的数据",
+  
+  "modal_search_header_not_submit":"请输入查询条件（暂未提交查找）",
+  "tree_welcome":"帮助",
+  "plat_0" : "跨平台",
+  "plat_all": "所有平台",
+  "select_plat": "请选择一个平台",
+  "user_all": "所有用户",
+  "select_srv": "请选择区服",
+  "select_all": "全选/反选",
+  "select_srv_modal_show": "开始选服",
+  "un_select_all": "全部删除",
+  
+  
+  "box_header_show" : "每页显示",
+  "box_header_entries" : "条数据",
+  
+  "box_footer_page_first": "首页",
+  "box_footer_page_last": "末页",
+  "box_footer_page_go": "跳转",
+  
+  
+  
+  "date_range_picker_Today": "今天",
+  "date_range_picker_Yesterday": "昨天",
+  "date_range_picker_Last7Days": "最近7天",
+  "date_range_picker_Last30Days": "最近30天",
+  "date_range_picker_ThisMonth": "当月",
+  "date_range_picker_LastMonth": "上月",
+  
+  "date_range_picker_applyLabel": "确定",
+  "date_range_picker_cancelLabel": "取消",
+  "date_range_picker_cancelLabel2": "清除",
+  "date_range_picker_fromLabel": "起始时间",
+  "date_range_picker_toLabel": "结束时间",
+  "date_range_picker_customRangeLabel" : "自定义",
+  "date_range_picker_daysOfWeek" : [ "日", "一", "二", "三", "四", "五", "六" ],
+  "date_range_picker_monthNames" : [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  "tree_admin":                         "系统管理",
+  "tree_admin.mylogin_list":                "我的登录",
+  "tree_admin.mylogin_list.get":                "查询、单页导出",
+  "tree_admin.mylogin_list.download":           "下载全部数据",
+  "tree_admin.modpwd_self":                 "我的密码",
+  "tree_admin.myoperation_list":            "我的操作",
+  "tree_admin.myoperation_list.get":            "查询、单页导出",
+  "tree_admin.myoperation_list.download":       "下载全部数据",
+  "tree_admin.operation_list":            "操作管理",
+  "tree_admin.operation_list.get":            "查询、单页导出",
+  "tree_admin.operation_list.download":       "下载全部数据",
+  "tree_admin.account":                     "账号管理",
+  "tree_admin.account.get":                     "查询账号",
+  "tree_admin.account.manager":                 "管理账号",
+  "tree_7":                                 "权限管理",
+  "tree_uri_blank_01":                      "权限管理",
+  "tree_admin.permission_user":                 "使用者",
+  "tree_admin.permission_user.get":                 "查看",
+  "tree_admin.permission_user.manager":             "管理",
+  "tree_admin.permission_role":                 "角色",
+  "tree_admin.permission_role.get":                 "查看",
+  "tree_admin.permission_role.manager":             "管理",
+  "tree_admin.permission":                      "角色的权限",
+  "tree_admin.permission.get":                      "查看角色的权限明细",
+  "tree_admin.permission.manager":                  "管理角色的权限分配",
+  "tree_14":                                "登录管理",
+  "tree_uri_blank_02":                      "登录管理",
+  "tree_admin.login_list":                      "登录记录",
+  "tree_admin.login_list.get":                      "查询、单页导出",
+  "tree_admin.login_list.download":                 "下载全部数据",
+  "tree_admin.ip_white":                        "IP白名单",
+  "tree_admin.ip_white.get":                     "查看IP白名单",
+  "tree_admin.ip_white.manager":                 "管理IP白名单",
+  "tree_admin.ip_black":                        "IP黑名单",
+  "tree_admin.ip_black.get":                        "查看IP黑名单",
+  "tree_admin.ip_black.manager":                    "管理IP黑名单",
+  "tree_admin.settings":                     "配置管理",
+  "tree_admin.settings.get":                     "查看配置",
+  "tree_admin.settings.manager":                 "修改配置",
+  
+  
+  "tree_platforms":                      "平台管理",
+  "tree_platforms.manager":                  "平台信息",
+  "tree_platforms.manager.get":                  "查看平台信息",
+  "tree_platforms.manager.manager":              "管理平台信息",
+  
+  "tree_servers":                        "区服管理",
+  "tree_servers.manager":                    "区服信息",
+  "tree_servers.manager.get":                    "查看区服信息",
+  "tree_servers.manager.manager":                "管理区服信息（基础）",
+  "tree_servers.manager.config":                 "管理区服信息（扩展）",
+  "tree_servers.manager.download":               "下载导出",
+  "tree_servers.plat":                       "分平台区服信息",
+  "tree_servers.plat.get":                       "查看信息",
+  "tree_servers.plat.manager":                   "管理信息",
+  
+  "tree_optools":                       "运营工具",
+  "tree_optools.servers":                   "区服工具",
+  "tree_optools.servers.get":                   "状态查询",
+  "tree_optools.servers.entrance":              "入口管理",
+  "tree_optools.servers.close_server":          "关闭区服",
+  "tree_optools.servers.prt":                   "守护管理",
+  "tree_optools.servers.flush_cache":           "刷新缓存",
+  "tree_optools.servers.sql":                   "执行SQL",
+  "tree_optools.servers_version":           "版本信息比较",
+  "tree_optools.servers_url":               "服务端路径及资源CDN",
+  "tree_optools.servers_prepare":           "开服准备",
+  "tree_optools.servers_bs_name":           "跨服战区服名称显示",
+  "tree_optools.servers_combine_sid":       "合服后区服ID修改",
+  
+  "tree_export":                        "数据导出",
+  "tree_export.table":                      "表数据导出", 
+  
+  "test":""
+}

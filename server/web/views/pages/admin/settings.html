@@ -1,0 +1,108 @@
+
+<!-- 数据显示box -->
+<form class="form-horizontal" role="form" id="form" name="form" novalidate="novalidate">
+
+    <div class="row">
+        
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="box">
+                <div class="box-header">
+                    <button data-ng-click="save()" data-ng-if="headfunc.manager" type="submit" title="{{ langs.save }}" class="pull-right btn btn-success btn-sm btn-func">
+                        <i class="fa fa-save"></i>
+                    </button>
+                </div>
+                
+                
+                <div class="box-body">
+                
+                    <div class="panel-group" id="accordion_add">
+                        <!-- 微信服务号配置 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseOne_add">
+                                        <i class="fa fa-chevron-circle-down"></i>
+                                        {{langs.weixin_service_settings}}
+                                        <m class="fa fa-weixin text-success"></m>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne_add" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    
+                                    <!-- 企业ID -->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{{ langs['weixin_service_appid'] }}：</label>
+                                        <div class="col-sm-7">
+                                            <input data-ng-if="headfunc.manager" type="text" class="form-control" data-toggle="tooltip" title="{{ langs['weixin_service_appid_tooltip'] }}" placeholder="{{langs.weixin_service_appid_placeholder}}"
+                                                id="weixin_service_appid" name="weixin_service_appid" value="" data-ng-model="add.weixin_service_appid"/>
+                                            <div data-ng-if="!headfunc.manager" class="form-control" style="border: none;box-shadow: none;">{{$parent.add.weixin_service_appid}}</div>
+                                        </div>
+                                    </div>
+                                    <!-- 应用Secret -->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{{ langs['weixin_service_appsecret'] }}：</label>
+                                        <div class="col-sm-7">
+                                            <input data-ng-if="headfunc.manager" type="text" class="form-control" data-toggle="tooltip" title="{{ langs['weixin_service_appsecret_tooltip'] }}" placeholder="{{langs.weixin_service_appsecret_placeholder}}"
+                                                id="weixin_service_appsecret" name="weixin_service_appsecret" value="" data-ng-model="add.weixin_service_appsecret" />
+                                            <div data-ng-if="!headfunc.manager" class="form-control" style="border: none;box-shadow: none;">{{$parent.add.weixin_service_appsecret}}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 微信服务号通知显示后台名称 -->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{{ langs['weixin_service_game_admin_name'] }}：</label>
+                                        <div class="col-sm-7">
+                                            <input data-ng-if="headfunc.manager" type="text" class="form-control" data-toggle="tooltip" title="{{ langs['weixin_service_game_admin_name_tooltip'] }}" placeholder="{{langs.weixin_service_game_admin_name_placeholder}}"
+                                                id="weixin_service_game_admin_name" name="weixin_service_game_admin_name" value="" data-ng-model="add.weixin_service_game_admin_name" />
+                                            <div data-ng-if="!headfunc.manager" class="form-control" style="border: none;box-shadow: none;">{{$parent.add.weixin_service_game_admin_name}}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 登录通知模板 -->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{{ langs['weixin_service_login_template_id'] }}：</label>
+                                        <div class="col-sm-7">
+                                            <input data-ng-if="headfunc.manager" type="text" class="form-control" data-toggle="tooltip" title="{{ langs['weixin_service_login_template_id_tooltip'] }}" placeholder="{{langs.weixin_service_login_template_id_placeholder}}"
+                                                id="weixin_service_login_template_id" name="weixin_service_login_template_id" value="" data-ng-model="add.weixin_service_login_template_id" />
+                                            <div data-ng-if="!headfunc.manager" class="form-control" style="border: none;box-shadow: none;">{{$parent.add.weixin_service_login_template_id}}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 微信服务号回调服务器IP -->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{{ langs['weixin_service_callback_ip'] }}：</label>
+                                        <div class="col-sm-7">
+                                            <input data-ng-if="headfunc.manager" type="text" class="form-control" data-toggle="tooltip" title="{{ langs['weixin_service_callback_ip_tooltip'] }}" placeholder="{{langs.weixin_service_callback_ip_placeholder}}"
+                                                id="weixin_service_callback_ip" name="weixin_service_callback_ip" value="" data-ng-model="add.weixin_service_callback_ip" />
+                                            <div data-ng-if="!headfunc.manager" class="form-control" style="border: none;box-shadow: none;">{{$parent.add.weixin_service_callback_ip}}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 微信服务号回调后台编号 -->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{{ langs['weixin_service_callback_seq'] }}：</label>
+                                        <div class="col-sm-7">
+                                            <input data-ng-if="headfunc.manager" type="text" class="form-control" data-toggle="tooltip" title="{{ langs['weixin_service_callback_seq_tooltip'] }}" placeholder="{{langs.weixin_service_callback_seq_placeholder}}"
+                                                id="weixin_service_callback_seq" name="weixin_service_callback_seq" value="" data-ng-model="add.weixin_service_callback_seq" />
+                                            <div data-ng-if="!headfunc.manager" class="form-control" style="border: none;box-shadow: none;">{{$parent.add.weixin_service_callback_seq}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- ./微信服务号配置 -->
+                        
+                    </div> <!-- ./panel-group -->
+                    
+                    
+                </div>
+                
+                <div class="box-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</form>
+

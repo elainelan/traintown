@@ -1,0 +1,18 @@
+<!-- ng-include后，该文件里面的$scope是新建的，如果需要使用页面变量，应该使用$parent处理 -->
+<label>
+    {{langs.box_header_show}}
+    <select name="page_len" class="inline" data-ng-model="$parent.length_select" data-ng-change="set_default_page_number($parent.length_select);jump($parent.go_page);">
+        <option data-ng-repeat="x in page_number" value="{{ x }}">{{ x }}</option>
+    </select>
+    {{langs.box_header_entries}}
+</label>
+<!-- 查找 -->
+<button style="margin-left: 5px;" class="btn btn-primary btn-sm pull-right" data-ng-click="modal_search()" title="{{langs.box_header_search_title}}"><i class="fa fa-search"></i></button>
+<!-- 打印 -->
+<button style="margin-left: 5px;" class="btn btn-primary btn-sm pull-right" title="{{langs.box_header_print_title}}" onclick="window.print()"><i class="fa fa-print"></i></button>
+<!-- 导出当页数据 -->
+<button style="margin-left: 5px;" data-ng-if="$parent.headfunc.export" class="btn btn-primary btn-sm pull-right" data-ng-click="export()" title="{{langs.box_header_export_title}}"><i class="glyphicon glyphicon-export"></i></button>
+<!-- 下载 -->
+<button style="margin-left: 5px;" data-ng-if="$parent.headfunc.download" class="btn btn-primary btn-sm pull-right" data-ng-click="download()" title="{{langs.box_header_download_title}}"><i class="glyphicon glyphicon-cloud-download"></i></button>
+<!-- 添加 -->
+<button style="margin-left: 5px;" data-ng-if="$parent.headfunc.manager" class="btn btn-success btn-sm pull-right" data-ng-click="modal_add('add')" title="{{langs.box_header_add_title}}"><i class="fa fa-plus"></i></button>

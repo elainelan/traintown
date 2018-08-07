@@ -1,0 +1,16 @@
+<!--
+ng-include后：
+    1、该文件里面的$scope是新建的，变量都是本作用域使用，如果需要使用本页面之外的变量，应该“ $parent.变量名 ”引用
+    2、本页面外的对象不需要使用$parent，可直接使用，例如：data.page_current
+-->
+<div data-ui-i18n="$parent.ui_grid.get_i18n()">
+    <div data-ng-style="ui_grid_style"
+        data-ui-grid="gridOptions"
+        data-ui-grid-auto-resize
+        data-ui-grid-resize-columns
+        data-ui-grid-move-columns
+        data-ui-grid-pinning
+        data-ui-grid-exporter
+    >
+    </div>
+</div>

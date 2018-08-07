@@ -1,0 +1,264 @@
+
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    
+    <div class="col-sm-10 col-sm-offset-1">
+        
+        <div class="box">
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+            
+            
+            <div class="box-body" data-ng-include="'pages/common/box-body.html'">
+                <!-- pages/common/box-body.html -->
+            </div>
+            
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+                <!-- pages/common/box-footer.html -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 模态框（管理） -->
+<div class="modal fade" id="modal_manager" name="modal_manager" role="dialog" aria-labelledby="modal_manager" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ langs['account_manager'] }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="myForm" novalidate="novalidate">
+                    <div class="row">
+                        <!-- resetpwd -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{langs.resetpwd}}:</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="resetpwd" name="resetpwd"
+                                data-ng-model="manager.resetpwd" 
+                                data-toggle="tooltip" title="{{langs.pwd_tooltip}}"  
+                                placeholder="{{langs.pwd_placeholder}}" 
+                                >
+                            </div>
+                        </div>
+                        
+                        <!-- reset_sk -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{langs.reset_sk}}:</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="reset_sk" name="reset_sk"
+                                data-ng-model="manager.reset_sk" 
+                                data-toggle="tooltip" title="{{langs.sk_tooltip}}" 
+                                placeholder="{{langs.sk_placeholder}}"
+                                >
+                            </div>
+                        </div>
+                        
+                        <!-- reset_force_pwd -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{langs.reset_force_pwd}}:</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" tabindex="-1" data-ng-model="manager.reset_force_pwd" style="width:100%">
+                                    <option value="0">{{ langs.reset_force_pwd_0 }}</option>
+                                    <option value="1">{{ langs.reset_force_pwd_1 }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="manager_ok()">{{ langs['submit']}}</button>
+                <button type="button" class="btn btn-default"  data-dismiss="modal">{{ langs['modal_close_btn']}}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（添加） -->
+<div class="modal fade" id="modal_add" name="modal_add" role="dialog" aria-labelledby="modal_add" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ langs.add_new_account }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="modal_add_form" name="modal_add_form" novalidate="novalidate">
+                    <div class="row">
+                        <!-- platid -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platform }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control add_select2" tabindex="-1" data-ng-init="add.platid=users.data.platid" data-ng-model="add.platid" style="width:100%">
+                                    <option data-ng-if="users.data.platid=='0'" value="0">{{ '0 : '+langs.plat_0 }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- name -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.username }}：</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="add_name" name="add_name" data-ng-model="add.name">
+                            </div>
+                        </div>
+                        
+                        <!-- loginname -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.loginname }}：</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="add_loginname" name="add_loginname" data-ng-model="add.loginname">
+                            </div>
+                        </div>
+                        
+                        <!-- loginpwd -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.loginpwd }}：</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="add_loginpwd" name="add_loginpwd"
+                                    data-ng-model="add.loginpwd" 
+                                    data-toggle="tooltip" title="{{langs.pwd_tooltip}}"  
+                                    placeholder="{{langs.pwd_placeholder}}"
+                                    >
+                            </div>
+                        </div>
+                        
+                        <!-- safekey -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.safekey }}：</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="add_safekey" name="add_safekey"
+                                    data-ng-model="add.safekey" 
+                                    data-toggle="tooltip" title="{{langs.sk_tooltip}} " 
+                                    placeholder="{{langs.sk_placeholder}}"
+                                    >
+                            </div>
+                        </div>
+                        
+                        <!-- force_pwd -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.force_pwd }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" tabindex="-1" data-ng-init="add.force_pwd='1'" data-ng-model="add.force_pwd" style="width:100%">
+                                    <option value="0">{{ langs.force_pwd_0 }}</option>
+                                    <option value="1">{{ langs.force_pwd_1 }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_add_ok()">{{ langs.submit }}</button>
+                <button type="button" class="btn btn-warning" data-ng-click="modal_add_reset()">{{ langs['reset'] }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<!-- 模态框（查找） -->
+<div class="modal fade" id="modal_search" name="modal_search" role="dialog" aria-labelledby="modal_search" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="modal_search_form" name="modal_search_form" novalidate="novalidate">
+                    <div class="row">
+                    
+                        <!-- platid -->
+                        <div class="form-group col-sm-10 col-sm-offset-1" data-ng-view="platid">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platform }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control search_select2" tabindex="-1" data-ng-change="modal_search_platform()" data-ng-model="search.platid" style="width:100%">
+                                    <option value="">{{ langs.plat_all }}</option>
+                                    <option data-ng-if="users.data.platid=='0'" value="0">{{ '0 : '+langs.plat_0 }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- username -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.username }}：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control search_select2" tabindex="-1" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.admin_userid" style="width:100%">
+                                    <option value="">{{ langs.user_all }}</option>
+                                    <option data-ng-repeat="(userid,x) in admin_users" value="{{ x.id }}" data-ng-if="!search.platid || x.platid==search.platid">
+                                        {{ x.id+' : '+x.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- ip -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.login_ip }}：</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="search_ip" name="search_ip" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.ip" placeholder="{{langs.loginip_placeholder}}">
+                            </div>
+                        </div>
+                        
+                        <!-- lastlogin -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.lastlogin }}：</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-left" id="search_lastlogin" name="search_lastlogin" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.lastlogin">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- regtm -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.regtm }}：</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-left" id="search_regtm" name="search_regtm" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.regtm">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- force_pwd -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.force_pwd }}：</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <select class="form-control" tabindex="-1" data-ng-change="modal_search_title_not_submit()" data-ng-model="search.force_pwd" style="width:100%">
+                                        <option value="">{{ langs.force_pwd_null }}</option>
+                                        <option value="0">{{ langs.force_pwd_0 }}</option>
+                                        <option value="1">{{ langs.force_pwd_1 }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_search_ok()">{{ langs.modal_search_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（删除确认） -->
+<data-ng-include src="'pages/common/modal_del.html'">
+    <!-- pages/common/modal_del.html -->
+</data-ng-include>

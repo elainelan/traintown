@@ -1,0 +1,443 @@
+
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    
+    <div class="col-sm-10 col-sm-offset-1">
+        
+        <div class="box">
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+            
+            
+            <div class="box-body" data-ng-include="'pages/common/box-body.html'">
+                <!-- pages/common/box-body.html -->
+            </div>
+            
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+                <!-- pages/common/box-footer.html -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（新增Modal） -->
+<div class="modal fade" id="modal_add" name="modal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <!-- header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{ langs['platform_'+add.action] }}
+                </h4>
+            </div>
+            <!-- body -->
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="modal_add_form" name="modal_add_form" novalidate="novalidate">
+                    <div class="row">
+                    
+                        <div class="panel-group" id="accordion_add">
+                            <!-- 基本配置 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseOne_add">
+                                            <i class="fa fa-chevron-circle-down"></i>
+                                            {{langs.platform_base}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne_add" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        
+                                        <!-- 平台ID -->
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">{{ langs['platid'] }}：</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" data-toggle="tooltip" title="{{ langs['platform_id_tooltip'] }}" placeholder="{{langs.platid_placeholder}}"
+                                                    id="platid" name="platid" value="" data-ng-model="add.id"/>
+                                            </div>
+                                        </div>
+                                        <!-- 平台名称 -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['platname'] }}：</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" data-toggle="tooltip" title="{{ langs['platform_name_tooltip'] }}" placeholder="{{langs.platname_placeholder}}"
+                                                    id="platname" name="platname" value="" data-ng-model="add.name" />
+                                            </div>
+                                        </div>
+                                        <!-- 游戏登录KEY -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['game_sig'] }}：</label>
+                                            <div class="col-sm-7">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" data-toggle="tooltip" title="{{langs.add_auto_create_game_sig_tooltip}}"
+                                                    id="game_sig" name="game_sig" value="{{ add.game_sig }}" data-ng-model="add.game_sig"
+                                                    placeholder="{{ langs.add_auto_create_game_sig }}">
+                                                    <div class="input-group-addon dropdown">
+                                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="javascript:void(0);" data-ng-click="modal_change_key('add.game_sig')">{{ langs['reset'] }}</a></li>
+                                                            <li><a href="javascript:void(0);" data-ng-click="modal_clear_key('add.game_sig')">{{ langs.clear_game_sig }}</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 游戏充值KEY -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['pay_sig'] }}：</label>
+                                            <div class="col-sm-7">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" data-toggle="tooltip" title="{{langs.add_auto_create_pay_sig_tooltip}}"
+                                                    id="pay_sig" name="pay_sig" value="{{ add.pay_sig }}" data-ng-model="add.pay_sig"
+                                                    placeholder="{{ langs.add_auto_create_pay_sig }}">
+                                                    <div class="input-group-addon dropdown">
+                                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="javascript:void(0);" data-ng-click="modal_change_key('add.pay_sig')">{{ langs['reset'] }}</a></li>
+                                                            <li><a href="javascript:void(0);" data-ng-click="modal_clear_key('add.pay_sig')">{{ langs.clear_pay_sig }}</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 关服时间 -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['close_tm'] }}：</label>
+                                            <div class="col-sm-7">
+                                                <!--<input type="text" class="form-control" id="close_tm" data-ng-model="add.close_tm" />-->
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-clock-o"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="close_tm" name="close_tm" data-ng-model="add.close_tm" placeholder="{{langs.close_tm_placeholder}}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./基本配置 -->
+                            
+                            <!-- 功能开关 -->
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseTwo_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.platform_toggle}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 col-xs-5 control-label">{{ langs['ptoolbar'] }}：</label>
+                                            <div class="col-sm-5 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="add.ptoolbar = (add.ptoolbar+1)%2 " data-ng-init="add.ptoolbar=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': add.ptoolbar==0, 'fa fa-toggle-on fa-2x text-success': add.ptoolbar==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 col-xs-5 control-label">{{ langs['safe'] }}：</label>
+                                            <div class="col-sm-5 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="add.safe = (add.safe+1)%2 " data-ng-init="add.safe=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': add.safe==0, 'fa fa-toggle-on fa-2x text-success': add.safe==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 col-xs-5 control-label">{{ langs['pfcm'] }}：</label>
+                                            <div class="col-sm-5 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="add.pfcm = (add.pfcm+1)%2 " data-ng-init="add.pfcm=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': add.pfcm==0, 'fa fa-toggle-on fa-2x text-success': add.pfcm==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 col-xs-5 control-label">{{ langs['onbeforeunload'] }}：</label>
+                                            <div class="col-sm-5 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="add.onbeforeunload = (add.onbeforeunload+1)%2 " data-ng-init="add.onbeforeunload=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': add.onbeforeunload==0, 'fa fa-toggle-on fa-2x text-success': add.onbeforeunload==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 col-xs-5 control-label">{{ langs['forcein'] }}：</label>
+                                            <div class="col-sm-5 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="add.forcein = (add.forcein+1)%2 " data-ng-init="add.forcein=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': add.forcein==0, 'fa fa-toggle-on fa-2x text-success': add.forcein==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 col-xs-5 control-label">{{ langs['automis'] }}：</label>
+                                            <div class="col-sm-5 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="add.automis = (add.automis+1)%2 " data-ng-init="add.automis=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': add.automis==0, 'fa fa-toggle-on fa-2x text-success': add.automis==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./功能开关 -->
+                            
+                            <!-- 其他功能 -->
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseFour_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.platform_others}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        
+                                        <!--微端下载-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['miniurl'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="mini" data-ng-model="add.mini" />
+                                            </div>
+                                        </div>
+                                        <!--微端登录-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['mini_login'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="mini_login" data-ng-model="add.mini_login" />
+                                            </div>
+                                        </div>
+                                        <!--微端版本-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['mini_ver'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="mini_ver" data-ng-model="add.mini_ver" />
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{langs.supervip_config}}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="supervip_config" data-ng-model="add.supervip_config"
+                                                data-toggle="tooltip" title="{{langs.supervip_config_tooltip}}" data-html="true"
+                                                placeholder="{{langs.supervip_config_placeholder}}" 
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">pay_adr：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="pay_adr" data-ng-model="add.pay_adr" />
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./其他功能 -->
+                            
+                            <!-- URL链接地址 -->
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseThree_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.platform_urls}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        
+                                        <!--官网-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['weburl'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="web" data-ng-model="add.web" placeholder="{{langs.weburl_placeholder}}"/>
+                                            </div>
+                                        </div>
+                                        <!--论坛-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['bbsurl'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="bbsurl" data-ng-model="add.bbs" placeholder="{{langs.bbsurl_placeholder}}"/>
+                                            </div>
+                                        </div>
+                                        <!--客服-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['gmurl'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="gmurl" data-ng-model="add.gm_url" placeholder="{{langs.gmurl_placeholder}}"/>
+                                            </div>
+                                        </div>
+                                        <!--防沉迷补填-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['cmurl'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="cmurl" data-ng-model="add.cm_url" placeholder="{{langs.cmurl_placeholder}}"/>
+                                            </div>
+                                        </div>
+                                        <!--新手卡-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['newcardurl'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="newcardurl" data-ng-model="add.newcard_url" placeholder="{{langs.newcardurl_placeholder}}"/>
+                                            </div>
+                                        </div>
+                                        <!--防沉迷上报（废弃）-->
+                                        <!-- 
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['fcmurl'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="fcmurl" data-ng-model="add.fcm" />
+                                            </div>
+                                        </div>
+                                        -->
+                                        <!--手机验证-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['phone_url'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="phone_url" data-ng-model="add.phone_url" placeholder="{{langs.phone_url_placeholder}}"/>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <!-- 充值配置（废弃） -->
+                                        <!-- 
+                                        <div class="form-group" data-ng-if="users.data.pay == '1'">
+                                            <label  class="col-sm-3 control-label"  >{{ langs['pay_pre_num_pct'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="num_pct" data-ng-model="add.num_pct" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-ng-if="users.data.pay == '1'">
+                                            <label  class="col-sm-3 control-label">{{ langs['pay_pre_pay_pct'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="pay_pct" data-ng-model="add.pay_pct" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-ng-if="users.data.pay == '1'">
+                                            <label  class="col-sm-3 control-label">{{ langs['pay_pre_pay1'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="money_min" data-ng-model="add.money_min" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-ng-if="users.data.pay == '1'">
+                                            <label  class="col-sm-3 control-label">{{ langs['pay_pre_pay2'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="money_max" data-ng-model="add.money_max" />
+                                            </div>
+                                        </div>
+                                        -->
+                                        
+                                        
+                                        <!-- 废弃 -->
+                                        <!-- 
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">muids2_config：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="muids2_config" data-ng-model="add.muids2_config" />
+                                            </div>
+                                        </div>
+                                        -->
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./URL链接地址 -->
+                            
+                            
+                            <!-- 手游配置 -->
+                            <div class="panel panel-danger">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseFive_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.platform_phone}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFive_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <!--手机测试账号uid-->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['sj_test'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <textarea class="form-control"  id="sj_test" data-toggle="tooltip" title="{{ langs['platform_uid_phone_tip'] }}" rows="3" data-ng-model="add.sj_test"></textarea>
+                                            </div>
+                                        </div>
+                                        <!--手机平台名称 -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-3 control-label">{{ langs['sj_pid'] }}：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="sj_pid" data-toggle="tooltip" title="{{ langs['platform_uid_phone_tip'] }}" data-ng-model="add.sj_pid" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- ./手游配置 -->
+                            
+                        </div> <!-- ./panel-group -->
+                    </div> <!-- ./row -->
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_add_ok()">
+                    {{ langs['submit_platform'] }}
+                </button>
+                <button type="button" class="btn btn-warning" data-ng-click="modal_add_reset()">{{ langs['reset'] }}
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs['close'] }}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（查找） -->
+<div class="modal fade" id="modal_search" role="dialog" aria-labelledby="modal_search" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="modal_search_form" novalidate="novalidate">
+                    <div class="row">
+                        <!-- 平台 -->
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platid }}:</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2" tabindex="-1" data-ng-model="search.platid" data-ng-change="modal_search_title_not_submit()" style="width:100%">
+                                    <option value="">{{ langs.plat_all }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-ng-click="modal_search_ok()">{{ langs.modal_search_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（删除确认） -->
+<data-ng-include src="'pages/common/modal_del.html'">
+    <!-- pages/common/modal_del.html -->
+</data-ng-include>

@@ -1,0 +1,579 @@
+<!-- 数据显示box -->
+<div data-ng-show="r" class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="box">
+        
+            <div class="box-header" data-ng-include="'pages/common/box-header.html'">
+                <!-- pages/common/box-header.html -->
+            </div>
+            
+            <div class="box-body" data-ng-include="'pages/common/box-body.html'">
+                <!-- pages/common/box-body.html -->
+            </div>
+            
+            <div class="box-footer" data-ng-include="'pages/common/box-footer.html'">
+                <!-- pages/common/box-footer.html -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（新增/修改/复制新增Modal） -->
+<div class="modal fade" id="modal_mod" name="modal_mod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <!-- header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{ langs["modal_title_"+pageType] }}
+                </h4>
+            </div>
+            <!-- body -->
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="modal_add_form" name="modal_add_form" novalidate="novalidate">
+                    <div class="row">
+                    
+                        <div class="panel-group" id="accordion_add">
+                            <!-- 基本配置 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseOne_add">
+                                            <i class="fa fa-chevron-circle-down"></i>
+                                            {{langs.server_base}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne_add" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        
+                                        <!-- sid -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.sid }} :</label>
+                                            <div class="col-sm-6"style="padding-top:6px">
+                                                <input type="text" class="form-control" id="sid_mod" name="sid_mod" data-toggle="tooltip" title="{{ langs.server_id_tip }}" data-ng-model="modobj.sid" />
+                                            </div>
+                                        </div>
+                                        <!-- srv_name -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.srv_name }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="srv_name_mod" name="srv_name_mod" data-ng-model="modobj.srv_name" required/>
+                                            </div>
+                                        </div>
+                                        <!-- srv_ip -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.srv_ip }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="srv_ip_mod" name="srv_ip_mod" data-ng-model="modobj.srv_ip" required/>
+                                            </div>
+                                        </div>
+                                        <!-- srv_ip2 -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.srv_ip2 }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="srv_ip2_mod" value=""  data-ng-model="modobj.srv_ip2" required/>
+                                            </div>
+                                        </div>
+                                        <!-- type -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.type }} :</label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" name="type" id="type_mod" data-ng-model="modobj.type" data-ng-change="modal_servertypes_change()">
+                                                    <option data-ng-repeat="(k,v) in langs.type_x" value="{{ k }}">{{ v }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- 入口 -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 col-xs-5 control-label">{{ langs['close'] }}:</label>
+                                            <div class="col-sm-6 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="modobj.close = (modobj.close+1)%2 " data-ng-init="modobj.close=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': modobj.close==0, 'fa fa-toggle-on fa-2x text-success': modobj.close==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- platids -->
+                                        <div class="form-group" data-ng-show="pageType_server != 1">
+                                            <label  class="col-sm-4 control-label">{{ langs.platids }} :</label>
+                                            <div class="col-sm-6">
+                                                <select id="platids_mod" name="platids_mod" class="selectpicker show-tick form-control" multiple data-live-search="true" data-ng-model="modobj.platids">
+                                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.name }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./基本配置 -->
+                            
+                            <!-- 开服相关 -->
+                            <div class="panel panel-danger">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseEight_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.server_op}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseEight_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <!-- optm -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.optm }} :</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-clock-o"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="optm_mod" data-ng-model="modobj.optm" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- opver -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.opver }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="opver_mod" data-ng-model="modobj.opver" required/>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./开服相关 -->
+                            
+                            <!-- 功能开关 -->
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseSeven_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.server_toggle}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseSeven_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <!-- msg -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 col-xs-5 control-label">{{ langs['msg'] }}:</label>
+                                            <div class="col-sm-6 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="modobj.msg = (modobj.msg+1)%2 " data-ng-init="modobj.msg=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': modobj.msg==0, 'fa fa-toggle-on fa-2x text-success': modobj.msg==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- def -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 col-xs-5 control-label">{{ langs['def'] }}:</label>
+                                            <div class="col-sm-6 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="modobj.def = (modobj.def+1)%2 " data-ng-init="modobj.def=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': modobj.def==0, 'fa fa-toggle-on fa-2x text-success': modobj.def==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- new -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 col-xs-5 control-label">{{ langs['new'] }}:</label>
+                                            <div class="col-sm-6 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="modobj.new = (modobj.new+1)%2 " data-ng-init="modobj.new=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': modobj.new==0, 'fa fa-toggle-on fa-2x text-success': modobj.new==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- recomm -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 col-xs-5 control-label">{{ langs['recomm'] }}:</label>
+                                            <div class="col-sm-6 col-xs-5">
+                                                <a href="javascript:void(0)" data-ng-click="modobj.recomm = (modobj.recomm+1)%2 " data-ng-init="modobj.recomm=0">
+                                                    <i data-ng-class="{'fa fa-toggle-off fa-2x text-muted': modobj.recomm==0, 'fa fa-toggle-on fa-2x text-success': modobj.recomm==1}"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- srv_status -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 col-xs-5 control-label">{{ langs.srv_status }} :</label>
+                                            <div class="col-sm-3 col-xs-5">
+                                                <select  class="form-control" name="srv_status" id="srv_status_mod" data-ng-model="modobj.srv_status">
+                                                    <option data-ng-repeat="(k,v) in langs.srv_status_x" value="{{ k }}">{{ v }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./功能开关 -->
+                            
+                            <!-- 区服端口 -->
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseTwo_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.srv_port}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        
+                                        <div class="panel-body">
+                                            
+                                            <!-- game_port -->
+                                            <div class="form-group">
+                                                <label  class="col-sm-4 control-label">{{ langs.game_port }} :</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="game_port_mod" name="game_port_mod" data-ng-model="modobj.game_port" />
+                                                </div>
+                                            </div>
+                                            <!-- srv_conf_port -->
+                                            <div class="form-group">
+                                                <label  class="col-sm-4 control-label">{{ langs.srv_conf_port }} :</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="srv_conf_port_mod" name="srv_conf_port_mod" data-ng-model="modobj.srv_conf_port" />
+                                                </div>
+                                            </div>
+                                            <!-- srv_prt_port -->
+                                            <div class="form-group">
+                                                <label  class="col-sm-4 control-label">{{ langs.srv_prt_port }} :</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="srv_prt_port_mod" name="srv_prt_port_mod" data-ng-model="modobj.srv_prt_port" />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./区服端口  -->
+                            
+                            <!-- 游戏数据库 -->
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseFour_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.gamedb}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        
+                                        <!-- gamedb -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.gamedb_name }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="gamedb_name_mod" name="gamedb_name_mod" data-ng-model="modobj.gamedb_name" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.gamedb_ip }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="gamedb_ip_mod" name="gamedb_ip_mod" data-ng-model="modobj.gamedb_ip" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.gamedb_user }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="gamedb_user_mod" name="gamedb_user_mod" data-ng-model="modobj.gamedb_user" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.gamedb_pwd }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="gamedb_pwd_mod" name="gamedb_pwd_mod" data-ng-model="modobj.gamedb_pwd" />
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./游戏数据库 -->
+                            
+                            <!-- 日志数据库 -->
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseThree_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.logdb}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        
+                                        <!-- logdb -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.logdb_name }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="logdb_name_mod" name="logdb_name_mod" data-ng-model="modobj.logdb_name" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.logdb_ip }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="logdb_ip_mod" name="logdb_ip_mod" data-ng-model="modobj.logdb_ip" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.logdb_user }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="logdb_user_mod" name="logdb_user_mod" data-ng-model="modobj.logdb_user" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.logdb_pwd }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="logdb_pwd_mod" name="logdb_pwd_mod" data-ng-model="modobj.logdb_pwd" />
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./日志数据库 -->
+                            
+                            
+                            <!-- 充值数据库 -->
+                            <div class="panel panel-danger">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseFive_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.paydb}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFive_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <!-- paydb -->
+                                        <div class="form-group">
+                                            
+                                            <label  class="col-sm-4 control-label">{{ langs.paydb_name }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="paydb_name_mod" name="paydb_name_mod" data-ng-model="modobj.paydb_name" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.paydb_ip }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="paydb_ip_mod" name="paydb_ip_mod" data-ng-model="modobj.paydb_ip" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.paydb_user }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="paydb_user_mod" name="paydb_user_mod" data-ng-model="modobj.paydb_user" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.paydb_pwd }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="paydb_pwd_mod" name="paydb_pwd_mod" data-ng-model="modobj.paydb_pwd" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- ./充值数据库 -->
+                            
+                            <!-- 客服数据库 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseSix_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.kfdb}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseSix_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <!-- kfdb -->
+                                        <div class="form-group">
+                                            
+                                            <label  class="col-sm-4 control-label">{{ langs.kfdb_name }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="kfdb_name_mod" data-ng-model="modobj.kfdb_name" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.kfdb_ip }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="kfdb_ip_mod" data-ng-model="modobj.kfdb_ip" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.kfdb_user }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="kfdb_user_mod" data-ng-model="modobj.kfdb_user" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.kfdb_pwd }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="kfdb_pwd_mod" data-ng-model="modobj.kfdb_pwd" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- ./客服数据库 -->
+                            
+                            <!-- 游戏配置 -->
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseNine_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.server_game_conf}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseNine_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.cq_root }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="cq_root_mod" name="cq_root_mod" data-toggle="tooltip" title="{{ langs.url_tip }}" data-ng-model="modobj.cq_root" />
+                                            </div>
+                                        </div>
+                                        <!-- static_url -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.static_url }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="static_url_mod" name="static_url_mod" data-toggle="tooltip" title="{{ langs.url_tip }}" data-ng-model="modobj.static_url" />
+                                            </div>
+                                        </div>
+                                        <!-- web_static -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.web_static }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="web_static_mod" name="web_static_mod" data-toggle="tooltip" title="{{ langs.url_tip }}" data-ng-model="modobj.web_static" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- ./游戏配置 -->
+                            
+                            <!-- 合服相关 -->
+                            <div class="panel panel-info" data-ng-show="pageType_server == 1 || pageType_server == 2">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="panel-a-click" href="javascript:void(0);" data-toggle="collapse" data-parent="#accordion_add" data-target="#collapseTen_add">
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                            {{langs.server_combine}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTen_add" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <!-- iface_his -->
+                                        <div class="form-group" data-ng-if="headfunc.config">
+                                            <label  class="col-sm-4 control-label">{{ langs.iface_his }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="iface_his_mod" data-toggle="tooltip" title="{{ langs.iface_his_tip }}" data-ng-model="modobj.iface_his" />
+                                            </div>
+                                        </div>
+                                        <!-- combine_time -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.combine_time }} :</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-clock-o"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="combine_tm_mod" data-ng-model="modobj.combine_tm" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- combine_sid -->
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">{{ langs.combine_sid }} :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="combine_sid_mod" data-ng-model="modobj.combine_sid" />
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- ./合服相关 -->
+                            
+                        </div> <!-- ./panel-group -->
+                    </div> <!-- ./row -->
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{ langs.modal_close_btn }}
+                </button>
+                
+                <button type="button" class="btn btn-warning" data-ng-click="modal_add_reset()" data-ng-if="pageType == 1">
+                    {{ langs.reset }}
+                </button>
+                
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_mod_ok()" data-ng-if="pageType == 2">
+                    {{ langs.submit }}
+                </button>
+                
+                <button type="submit" class="btn btn-primary" data-ng-click="modal_add_ok()" data-ng-if="pageType == 1 || pageType == 3">
+                    {{ langs.submit }}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（查找） -->
+<div class="modal fade" id="modal_search" role="dialog" aria-labelledby="modal_search" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal_search_title">{{ langs.modal_search_header }}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="modal_search_form" novalidate="novalidate">
+                    <!-- 区服类型查询条件 -->
+                    <div class="row">
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.type }}:</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2" tabindex="-1" data-ng-init="search.type='0'" data-ng-model="search.type" style="width:100%" data-ng-change="modal_search_title_not_submit()">
+                                    <option value="">{{ langs.type_all }}</option>
+                                    <option data-ng-repeat="(k,v) in langs.type_x" value="{{ k }}">{{ v }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 所属平台查询条件 -->
+                    <div class="row">
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 col-sm-offset-1 control-label">{{ langs.platids }}:</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2" tabindex="-1" data-ng-model="search.platid" data-ng-change="modal_search_title_not_submit()" style="width:100%">
+                                    <option value="">{{ langs.plat_all }}</option>
+                                    <option data-ng-repeat="platform in platforms" value="{{ platform.id }}">{{ platform.id+' : '+platform.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-ng-click="modal_search_ok()">{{ langs.modal_search_ok }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ langs.modal_close_btn }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（删除确认） -->
+<data-ng-include src="'pages/common/modal_del.html'">
+    <!-- pages/common/modal_del.html -->
+</data-ng-include>

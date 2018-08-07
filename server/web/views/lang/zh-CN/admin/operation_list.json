@@ -1,0 +1,25 @@
+{
+  "operation_seq"  :  "序号",
+  "operation_user"  :  "使用者",
+  "operation_user_tooltip": "账号ID : 使用者",
+  "operation_tm"  :  "操作时间",
+  "operation_ip"  :  "操作IP",
+  "operation_plat"  :  "操作平台",
+  "operation_username"  :  "使用者",
+  "operation_function"  :  "操作功能",
+  "operation_uri_all"  :  "全部操作",
+  "operation_uri"  :  "URI",
+  "operation_res"  :  "操作结果",
+  "operation_res_all"  :  "全部",
+  "operation_res_1"  :  "成功",
+  "operation_res_0"  :  "失败",
+  "operation_detail"  :  "显示详细信息",
+  
+  "search_time_invalid": "请输入正确的操作时间",
+  "search_ip_invalid": "请输入正确的操作IP",
+  "search_ip_placeholder": "支持IP模糊查询",
+  
+  "user_all": "所有使用者",
+  
+  "test": ""
+}

@@ -1,0 +1,14 @@
+{
+  "export_db": "导出数据库",
+  "export_table": "导出表名",
+  "export":"导出",
+  "modal_export_header":"导出提示",
+  "export_watting":"正在下载中",
+  
+  "type"        :   "区服类型",
+  "type_all"    :   "所有类型",
+  "type_x"      :   {"0":"线上服", "1":"已合服", "2":"历史服", "3":"测试服"},
+  "platids"  :  "所属平台",
+  
+  "test": ""
+}

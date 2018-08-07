@@ -1,0 +1,24 @@
+﻿{
+  "button_info": "图标说明",
+  "button_icon": "图标",
+  "button_desc": "说明",
+  
+  "button_search_desc": "查找：选定条件后查询数据。",
+  "button_print_desc": "打印：打印数据表格内容。",
+  "button_download_desc": "下载：下载表格数据。",
+  
+  "button_manager_desc": "管理：对应数据的管理功能。",
+  "button_add_desc": "添加：增加相关数据。",
+  "button_mod_desc": "修改：修改对应数据相关信息。",
+  "button_del_desc": "删除：删除对应数据。",
+  "button_clone_add": "克隆：以克隆方式新增对应数据。",
+  
+  "button_save_desc": "保存：保存对应数据的修改。",
+  "button_cancel_desc": "取消：取消对应数据的修改。",
+  
+  "button_first_desc": "首页：显示数据第一页。",
+  "button_last_desc": "末页：显示数据最后一页。",
+  "button_jump_desc": "跳转：显示数据某一页。",
+  
+  "test":""
+}

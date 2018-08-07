@@ -1,0 +1,42 @@
+
+<ul class="sidebar-menu">
+    <li class="treeview" data-ng-repeat="(key,value) in treeMenu" data-repeat-finish="sidebarmenu_done()">
+        
+        <!-- 系统管理 -->
+        <a href="javascript:void(0)" id="{{'menu_'+value.uri | to_id }}"
+        data-ng-class="{'text-orange': pathUrl[0] == value.uri }">
+            <i class="{{value.icon}}"></i>
+            <span>{{langs['tree_'+value.uri]}}</span>
+        </a>
+        
+        <ul data-ng-if="value.sub" class="treeview-menu" id="{{'ul_id_'+value.tree_id}}">
+            <li data-ng-repeat="(key1,value1) in value.sub" data-ng-class="{treeview: value1.sub}" id="{{'menu_id_li_'+value1.tree_id | to_id}}">
+                
+                <!-- 我的登录 -->
+                <a data-ng-if="!value1.sub" href="{{'#!'+value1.uri | topath}}" id="{{'menu_'+value1.uri | to_id}}" 
+                data-ng-class="{'text-orange': menuMethod == value1.uri }">
+                    <i style="padding-left: 15px;margin-right: 15px;" class="{{value1.icon}}"></i>
+                    <span>{{langs['tree_'+value1.uri]}}</span>
+                </a>
+                
+                <!-- 登录管理 -->
+                <a data-ng-if="value1.sub" href="javascript:void(0)" id="{{'menu_id_'+value1.tree_id | to_id}}" 
+                data-ng-class="{'text-orange': pathUrl[2] == value1.tree_id }" class="treemenu2">
+                    <i style="padding-left: 15px;margin-right: 15px;" class="fa fa-plus-circle"></i>
+                    <span>{{langs['tree_'+value1.tree_id]}}</span>
+                </a>
+                <ul data-ng-if="value1.sub" class="treeview-menu">
+                    <li data-ng-repeat="(key2,value2) in value1.sub" data-ng-class="{treeview: value2.sub}">
+                        
+                        <!-- 登录记录 -->
+                        <a class="leftmenu_li" href="{{'#!'+value2.uri+'/'+value1.tree_id | topath}}" id="{{'menu_'+value2.uri | to_id }}" 
+                        data-ng-class="{'text-orange': menuMethod == value2.uri }">
+                            <i class="{{value2.icon}}"></i>
+                            <span>{{langs['tree_'+value2.uri]}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
